@@ -1,0 +1,109 @@
+<main>
+    <div class="container-fluid px-4">
+        <h1 class="mt-4">Kateqoriya</h1>
+        <div class="row mt-3">
+            <div class="col-md-5">
+                <div class="boxel">
+                    <h6>Yeni üst Kateqoriya</h6>
+                    <form id="NewUpCategoryForm">
+                        <div class="input-group input-group-sm mb-3">
+                            <span class="input-group-text">Adı AZ: </span>
+                            <input type="text" class="form-control" name="up_cat_name_az_input" required="" minlength="2">
+                        </div>
+                        <div class="input-group input-group-sm mb-3">
+                            <span class="input-group-text">Adı EN: </span>
+                            <input type="text" class="form-control" name="up_cat_name_en_input" required="" minlength="2">
+                        </div>
+                        <div class="input-group input-group-sm mb-3">
+                            <span class="input-group-text">Adı RU: </span>
+                            <input type="text" class="form-control" name="up_cat_name_ru_input" required="" minlength="2">
+                        </div>
+                        <div class="d-grid gap-2">
+                            <button class="btn btn-sm btn-dark" type="submit">Tamamla</button>
+                        </div>
+                    </form>
+                </div>
+                <div class="boxel">
+                    <h6>Yeni sub Kateqoriya</h6>
+                    <form id="NewSubCategoryForm">
+                        <div class="form-floating mb-3">
+                            <select class="form-select SelectedUpCategory" name="SelectedUpCategory">
+                                <option selected value="0">Seçimi edin</option>
+                            </select>
+                            <label for="SelectedUpCategory">Üst kateqoriya</label>
+                        </div>
+                        <div class="input-group input-group-sm mb-3">
+                            <span class="input-group-text">Adı AZ: </span>
+                            <input type="text" class="form-control" name="sub_cat_name_input" required="" minlength="2">
+                        </div>
+                        <div class="input-group input-group-sm mb-3">
+                            <span class="input-group-text">Adı EN: </span>
+                            <input type="text" class="form-control" name="sub_cat_name_en_input" required="" minlength="2">
+                        </div>
+                        <div class="input-group input-group-sm mb-3">
+                            <span class="input-group-text">Adı RU: </span>
+                            <input type="text" class="form-control" name="sub_cat_name_ru_input" required="" minlength="2">
+                        </div>
+                        <div class="d-grid gap-2">
+                            <button class="btn btn-sm btn-primary" type="submit">Tamamla</button>
+                        </div>
+                    </form>
+                </div>
+                <div class="boxel">
+                    <h6>Yeni alt Kateqoriya</h6>
+                    <form id="NewAltCategoryForm">
+                        <div class="form-floating mb-3">
+                            <select class="form-select SelectedUpCategory" id="SelectedUpCategory" name="alt_up_category_selected">
+                                <option value="0" selected selected="">Seçimi edin</option>
+                            </select>
+                            <label for="SelectedUpCategory">Üst kateqoriya</label>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <select class="form-select" id="SelectedSubCategory" name="alt_sub_category_selected">
+                                <option value="0" selected>Seçimi edin</option>
+                            </select>
+                            <label for="SelectedSubCategory">Sub kateqoriya</label>
+                        </div>
+                        <div class="input-group input-group-sm mb-3">
+                            <span class="input-group-text">Adı AZ: </span>
+                            <input type="text" class="form-control" name="alt_cat_name_input" required="" minlength="2">
+                        </div>
+                        <div class="input-group input-group-sm mb-3">
+                            <span class="input-group-text">Adı EN: </span>
+                            <input type="text" class="form-control" name="alt_cat_name_en_input" required="" minlength="2">
+                        </div>
+                        <div class="input-group input-group-sm mb-3">
+                            <span class="input-group-text">Adı RU: </span>
+                            <input type="text" class="form-control" name="alt_cat_name_ru_input" required="" minlength="2">
+                        </div>
+                        <div class="d-grid gap-2">
+                            <button class="btn btn-sm btn-danger" type="submit">Tamamla</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="col-md-7">
+                <div class="boxel">
+                    <h6>Üst Kateqoriya</h6>
+                    <div id="categoryTable"></div>
+                </div>
+                <div class="boxel mt-2">
+                    <h6>Sub Kateqoriya</h6>
+                    <div id="subcategoryTable"></div>
+                </div>
+                <div class="boxel mt-2">
+                    <h6>Alt Kateqoriya</h6>
+                    <div id="altcategoryTable"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+
+
+<style>
+    table.gridjs-table {
+        width: 100%;
+    }
+</style>

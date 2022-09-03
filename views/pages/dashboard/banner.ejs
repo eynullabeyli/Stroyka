@@ -1,0 +1,54 @@
+<main>
+    <div class="container-fluid px-4">
+        <h1 class="mt-4">Banner</h1>
+        <div class="row mt-2">
+            <div class="col-md-5 mb-1">       
+                <div class="boxel">
+                    <h6>Yeni baner</h6>
+                    <form id="NewBanerForm">
+                        <div class="input-group input-group-sm mb-3">
+                            <span class="input-group-text">Başlıq AZ: </span>
+                            <input type="text" class="form-control" id="baner_name_input" required="" minlength="2">
+                        </div>
+                        <div class="input-group input-group-sm mb-3">
+                            <span class="input-group-text">Başlıq EN: </span>
+                            <input type="text" class="form-control" id="baner_name_en_input" required="" minlength="2">
+                        </div>
+                        <div class="input-group input-group-sm mb-3">
+                            <span class="input-group-text">Başlıq RU: </span>
+                            <input type="text" class="form-control" id="baner_name_ru_input" required="" minlength="2">
+                        </div>
+                        <div class="form-floating mb-1">
+                            <textarea class="form-control" id="BannerDescriptionAZ" style="height: 100px"></textarea>
+                            <label for="BannerDescriptionAZ">Açıqlama AZ</label>
+                        </div>
+                        <div class="form-floating mb-1">
+                            <textarea class="form-control" id="BannerDescriptionEN" style="height: 100px"></textarea>
+                            <label for="BannerDescriptionEN">Açıqlama EN</label>
+                        </div>
+                        <div class="form-floating mb-1">
+                            <textarea class="form-control" id="BannerDescriptionRU" style="height: 100px"></textarea>
+                            <label for="BannerDescriptionRU">Açıqlama RU</label>
+                        </div>
+                        <div class="mb-3">
+                            <label for="formFile" class="form-label">Şəkil</label>
+                            <input class="form-control" type="file" id="formFile" name="image">
+                        </div>
+                        <div class="mb-3">
+                            <label for="formFile2" class="form-label">Mobil şəkil</label>
+                            <input class="form-control" type="file" id="formFile2" name="mobile_image">
+                        </div>
+                        <input type="hidden" name="title">
+                        <input type="hidden" name="description">
+                        <div class="d-grid gap-2">
+                            <button class="btn btn-sm btn-danger" type="submit">Tamamla</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="col-md-5">       
+                <div id="bannerListTable"></div>
+            </div>
+        </div>
+    </div>
+</main>

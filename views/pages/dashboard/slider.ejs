@@ -1,0 +1,68 @@
+<main>
+    <div class="container-fluid px-4">
+        <h1 class="mt-4">Slider</h1>
+        <div class="row mt-2">
+            <div class="col-md-5">
+                <div class="boxel">
+                    <h6>Yeni slider</h6>
+                    <form id="NewSliderForm" enctype="multipart/form-data">
+                        <div class="input-group input-group-sm mb-3">
+                            <span class="input-group-text">Başlıq AZ: </span>
+                            <input type="text" class="form-control" id="SliderTitleAZInput" required="" minlength="2">
+                        </div>
+                        <div class="input-group input-group-sm mb-3">
+                            <span class="input-group-text">Başlıq EN: </span>
+                            <input type="text" class="form-control" id="SliderTitleENInput" required="" minlength="2">
+                        </div>
+                        <div class="input-group input-group-sm mb-3">
+                            <span class="input-group-text">Başlıq RU: </span>
+                            <input type="text" class="form-control" id="SliderTitleRUInput" required="" minlength="2">
+                        </div>
+                        <div class="form-floating mb-2">
+                            <textarea class="form-control" id="DescriptionAZInput" style="height: 100px"></textarea>
+                            <label for="DescriptionAZInput">Açıqlama AZ</label>
+                        </div>
+                        <div class="form-floating mb-2">
+                            <textarea class="form-control" id="DescriptionENInput" style="height: 100px"></textarea>
+                            <label for="DescriptionENInput">Açıqlama EN</label>
+                        </div>
+                        <div class="form-floating mb-2">
+                            <textarea class="form-control" id="DescriptionRUInput" style="height: 100px"></textarea>
+                            <label for="DescriptionRUInput">Açıqlama RU</label>
+                        </div>
+                        <div class="mb-1">
+                            <label for="formFileDesktop" class="form-label">Şəkil</label>
+                            <input class="form-control form-control-sm" id="formFileDesktop" type="file" name="image">
+                        </div>
+                        <div class="mb-1">
+                            <label for="formFileMobile" class="form-label">Mobil şəkil</label>
+                            <input class="form-control form-control-sm" id="formFileMobile" type="file" name="mobile_image">
+                        </div>
+                        <div class="input-group input-group-sm mb-3">
+                            <span class="input-group-text">Link: </span>
+                            <input type="text" class="form-control" name="path" required="" minlength="2">
+                        </div>
+                        <input type="hidden" name="title">
+                        <input type="hidden" name="description">
+                        <input type="hidden" name="mobile_description" value="zero">
+                        <div class="d-grid gap-2 mt-3">
+                            <button class="btn btn-sm btn-dark" type="submit">Tamamla</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="boxel">
+                    <h6>Əlavə edilmiş slider</h6>
+                    <div id="sliderListTable"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+<style>
+    table.gridjs-table {
+        width: 100%;
+    }
+</style>

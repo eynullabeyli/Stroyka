@@ -1,0 +1,48 @@
+
+<!DOCTYPE html>
+<html lang="az">
+    <%- include('../partials/dashboard/head'); %>
+    <body>
+        <div id="loader-cs">
+            <img src="/img/load.gif" alt="">
+        </div>
+        <style>
+            #loader-cs {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                height: 100vh;
+                width: 100%;
+                position: absolute;
+                top: 0;
+                left: 0;
+                z-index: 9999;
+                background: rgb(0 0 0 / 50%);
+                cursor: not-allowed;
+            }
+            #loader-cs img {
+                width: 77px;
+                height: 77px;
+            }
+        </style>
+        <%- include('../partials/dashboard/navbar'); %>
+        <div id="layoutSidenav">
+            <%- include('../partials/dashboard/sidebar'); %>
+            <div id="layoutSidenav_content">
+                <main>
+                    <div class="container-fluid px-4">
+                        <%- body %>
+                    </div>
+                </main>
+            </div>
+        </div>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="https://unpkg.com/gridjs/dist/gridjs.umd.js"></script>
+        <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/locale/az.min.js"></script>
+        <script src="/js/scripts.js"></script>
+        <script src="/js/procedural.js"></script>
+    </body>
+</html>

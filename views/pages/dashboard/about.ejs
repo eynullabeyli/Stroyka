@@ -1,0 +1,49 @@
+<main>
+    <div class="container-fluid px-4">
+        <h1 class="mt-4">Haqqımızda</h1>
+        <div class="col-md-12" style="margin-top: 10px;">
+            <div class="boxel">
+                <form id="AboutUs">
+                    <input type="hidden" name="uniq_id">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="input-group input-group-sm mb-4">
+                                <span class="input-group-text">Başlıq AZ: </span>
+                                <input type="text" class="form-control" name="about_az_input" required="" minlength="2">
+                            </div>
+                            <div class="mb-3">
+                                <label for="contentAZAbout" class="form-label">Kontent AZ</label>
+                                <textarea class="form-control" id="contentAZAbout" rows="3" name="about_az_desc_input"></textarea>
+                            </div>
+                            
+                        </div>
+                        <div class="col-md-4">
+                            <div class="input-group input-group-sm mb-4">
+                                <span class="input-group-text">Başlıq EN: </span>
+                                <input type="text" class="form-control" name="about_en_input" required="" minlength="2">
+                            </div>
+                            <div class="mb-3">
+                                <label for="contentENAbout" class="form-label">Kontent EN</label>
+                                <textarea class="form-control" id="contentENAbout" rows="3" name="about_en_desc_input"></textarea>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="input-group input-group-sm mb-4">
+                                <span class="input-group-text">Başlıq RU: </span>
+                                <input type="text" class="form-control" name="about_ru_input" required="" minlength="2">
+                            </div>
+                            <div class="mb-3">
+                                <label for="contentRUAbout" class="form-label">Kontent RU</label>
+                                <textarea class="form-control" id="contentRUAbout" rows="3" name="about_ru_desc_input"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="d-grid gap-2 d-md-flex justify-content-md-center mt-3">
+                        <button type="submit" class="btn btn-danger btn-block">Yenilə</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</main>
