@@ -49,7 +49,8 @@ if(window.location.pathname === "/dashboard/users") {
                     card.email,
                     card.adress,
                 ])
-          }
+        },
+        pagination: { limit: 7 }
     }).render(document.getElementById("usersTable"));
 }
 /* CATEGORY LIST DATA FOR GRID */
@@ -790,13 +791,17 @@ if(window.location.pathname === "/dashboard/team") {
                     card.profession.az,
                     card.profession.en,
                     card.profession.ru,
-                    gridjs.html(`<button type="button" data-id="${card.uniq_id}" class="btn btn-sm btn-danger DeleteTeamBTN">Sil</button>`)
+                    gridjs.html(`<button type="button" data-id="${card.uniq_id}" class="btn btn-sm btn-danger DeleteTeamBTN"><i class="fa fa-trash"></i> Sil</button>`)
                 ])
           }
     }).render(document.getElementById("teamTable")); 
     $("#AddNewTeamForm").submit((e) => {
         e.preventDefault();
-        if($(`input[name="profession_az_input"]`).val().length > 2) {
+        if( $(`input[name="name_input"]`).val().length > 2 &&
+            $(`input[name="profession_az_input"]`).val().length > 2 &&
+            $(`input[name="profession_en_input"]`).val().length > 2 &&
+            $(`input[name="profession_ru_input"]`).val().length > 2) {
+            $("#loader-cs").show();
             let team_prof__ = {
                     az: $(`input[name="profession_az_input"]`).val(),
                     en: $(`input[name="profession_en_input"]`).val(),
@@ -823,6 +828,7 @@ if(window.location.pathname === "/dashboard/team") {
                             'Yeni şəxs uğurla əlavə edildi',
                             'success'
                         )
+                        $("#loader-cs").hide();
                     }
                     else {
                         console.log(data, textStatus, xhr);

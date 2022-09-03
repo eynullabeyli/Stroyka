@@ -3,3 +3,7 @@
     padding: 12px;
     margin-bottom: -1px;
 }
+
+table.gridjs-table {
+    width: 100%;
+}
