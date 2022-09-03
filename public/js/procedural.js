@@ -779,6 +779,85 @@ if(window.location.pathname === "/dashboard/contact") {
     })
 }
 
+if(window.location.pathname === "/dashboard/team") {
+    var teamTable = new gridjs.Grid({
+        columns: ["Tam ad", "Peşə AZ", "Peşə EN", "Peşə RU", "---"],
+        server: {
+            url: `${api_base_url}/stroyka/get/team`,
+            then: data => data.map(card =>
+                [
+                    `${card.title}`,
+                    card.profession.az,
+                    card.profession.en,
+                    card.profession.ru,
+                    gridjs.html(`<button type="button" data-id="${card.uniq_id}" class="btn btn-sm btn-danger DeleteTeamBTN">Sil</button>`)
+                ])
+          }
+    }).render(document.getElementById("teamTable")); 
+    $("#AddNewTeamForm").submit((e) => {
+        e.preventDefault();
+        if($(`input[name="profession_az_input"]`).val().length > 2) {
+            let team_prof__ = {
+                    az: $(`input[name="profession_az_input"]`).val(),
+                    en: $(`input[name="profession_en_input"]`).val(),
+                    ru: $(`input[name="profession_ru_input"]`).val()
+            };
+            let fd__ = new FormData();
+            fd__.append("title", $(`input[name="name_input"]`).val());
+            fd__.append('image', document.getElementById('imageFileInput').files[0]);
+            fd__.append('profession', JSON.stringify(team_prof__));
+    
+            $.ajax({
+                type: "POST",
+                url: `${api_base_url}/admin/create/new/team`,
+                data: fd__,
+                processData: false,
+                contentType: false,
+                success: function(data, textStatus, xhr) {
+                    if(xhr.status === 200) {
+                        document.getElementById("AddNewTeamForm").reset();
+                        $("#AddTeamModal").modal("hide")
+                        teamTable.forceRender(document.getElementById("teamTable")); 
+                        Swal.fire(
+                            'Məlumat',
+                            'Yeni şəxs uğurla əlavə edildi',
+                            'success'
+                        )
+                    }
+                    else {
+                        console.log(data, textStatus, xhr);
+                        alert("Xəta baş verdi...")
+                    }
+                }
+            })
+        }
+    })
+    $(document).on("click", ".DeleteTeamBTN", function(e) {
+        let id__ = $(this).data("id")
+        $.ajax({
+            type: "DELETE",
+            url: `${api_base_url}/admin/delete/team`,
+            data: {
+                uniq_id: id__
+            },
+            success: function(data, textStatus, xhr) {
+                if(xhr.status === 200) {
+                    teamTable.forceRender(document.getElementById("teamTable")); 
+                    Swal.fire(
+                        'Məlumat',
+                        'Şəxs silindi',
+                        'success'
+                    )
+                }
+                else {
+                    console.log(data, textStatus, xhr);
+                    alert("Xəta baş verdi...")
+                }
+            }
+        })
+    })
+}
+
 $(document).ready(function() {
     setTimeout(() => {
         $("#loader-cs").hide();

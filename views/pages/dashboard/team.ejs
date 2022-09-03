@@ -1,1 +1,59 @@
-team page
+<main>
+    <div class="container-fluid px-4">
+        <h1 class="mt-4">Komanda</h1>
+        <div class="col-md-12" style="margin-top: 10px;">
+            <div class="card">
+                <div class="card-header d-flex justify-content-between align-items-center">
+                    <h5>Əlavə edilən şəxslər</h5>
+                    <button class="btn btn-sm btn-success"
+                    type="button"
+                    data-bs-toggle="modal" 
+                    data-bs-target="#AddTeamModal">
+                        <i class="fa fa-plus"></i> əlavə et</button>
+                </div>
+                <div class="card-body">
+                    <div id="teamTable"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+<style>
+    table.gridjs-table {
+        width: 100%;
+    }
+</style>
+<div class="modal" tabindex="-1" id="AddTeamModal">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Yeni şəxs əlavə et</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <form id="AddNewTeamForm" enctype="multipart/form-data">
+            <div class="modal-body">
+                <div class="input-group mb-2">
+                    <input type="text" class="form-control" placeholder="Tam ad" name="name_input">
+                </div>
+                <div class="input-group mb-2">
+                    <input type="text" class="form-control" placeholder="Peşə AZ" name="profession_az_input">
+                </div>
+                <div class="input-group mb-2">
+                    <input type="text" class="form-control" placeholder="Peşə EN" name="profession_en_input">
+                </div>
+                <div class="input-group mb-2">
+                    <input type="text" class="form-control" placeholder="Peşə RU" name="profession_ru_input">
+                </div>
+                <div class="input-group mb-2">
+                    <label class="input-group-text" for="imageFileInput">Şəkil</label>
+                    <input type="file" class="form-control" id="imageFileInput" accept="image/png, image/jpeg">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Bağla</button>
+                <button type="submit" class="btn btn-primary">Tamamla</button>
+            </div>
+        </form>
+      </div>
+    </div>
+  </div>

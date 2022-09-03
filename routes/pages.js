@@ -32,6 +32,9 @@ module.exports = (app) => {
     app.get('/form-request', (req, res) => {
         res.render('pages/dashboard/formrequest')
     });
+    app.get('/team', (req, res) => {
+        res.render('pages/dashboard/team')
+    });
  
     return app; 
  };
