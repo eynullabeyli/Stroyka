@@ -9,3 +9,69 @@
         </div>
     </div>
 </main>
+
+
+<div class="modal" tabindex="-1" id="OrderInfoModal">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Sifarişin ətraflı məlumatı</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <input type="hidden" name="order_uniq_id">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="card">
+                        <div class="card-header">Müştəri məlumatları</div>
+                        <div class="card-body">
+                            <div class="form-floating mt-2">
+                                <input type="text" class="form-control" id="order_username_input" disabled>
+                                <label for="order_username_input">Ad Soyad</label>
+                            </div>
+                            <div class="form-floating mt-2">
+                                <input type="text" class="form-control" id="order_address_input" disabled>
+                                <label for="order_address_input">Ünvan</label>
+                            </div>
+                            <div class="form-floating mt-2">
+                                <input type="text" class="form-control" id="order_email_input" disabled>
+                                <label for="order_email_input">E-poçt ünvanı</label>
+                            </div>
+                            <div class="form-floating mt-2">
+                                <input type="text" class="form-control" id="order_phone_input" disabled>
+                                <label for="order_phone_input">Əlaqə nömrəsi</label>
+                            </div>
+                            <div class="form-floating mt-2">
+                                <input type="text" class="form-control" id="order_registerdate_input" disabled>
+                                <label for="order_registerdate_input">Qeydiyat tarixi</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="card">
+                        <div class="card-header">Məhsul məlumatları</div>
+                        <div class="card-body">
+                            <div class="form-floating mt-2">
+                                <input type="text" class="form-control" id="order_product_name_input" disabled>
+                                <label for="order_product_name_input">Adı</label>
+                            </div>
+                            <div class="form-floating mt-2">
+                                <input type="text" class="form-control" id="order_product_price_input" disabled>
+                                <label for="order_product_price_input">Qiyməti</label>
+                            </div>
+                            <div class="form-floating mt-2">
+                                <input type="text" class="form-control" id="order_count_input" disabled>
+                                <label for="order_count_input">Sifariş sayı</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Bağla</button>
+        </div>
+      </div>
+    </div>
+  </div>

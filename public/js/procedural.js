@@ -451,23 +451,48 @@ if(window.location.pathname === "/dashboard/about") {
 
 if(window.location.pathname === "/dashboard/orders") {
     var ordersTable = new gridjs.Grid({
-        columns: ["Sifarişçi tam adı", "Məhsul adı", "Məhsul qiyməti", "Məhsul sayı", "Sifariş tarixi", "Status", "---"],
+        columns: ["Tam ad", "Məhsul adı", "Məhsul qiyməti", "Məhsul sayı", "Sifariş tarixi", "Status", "---"],
         server: {
             url: `${api_base_url}/admin/get/checkout`,
-            then: data => data.map(card => 
+            then: data => data.map(card =>
                 [
                     `${card.user.name} ${card.user.lastname}`,
                     `${card.product.name_az}`,
                     `${card.product.price}`,
                     card.productCount,
-                    `${moment(card.createdAt).local('az').format('LL')}`,
+                    gridjs.html(`${moment(card.createdAt).local('az').format('LL')} <span style="display: none;">${$("#loader-cs").hide()}</span>`),
                     gridjs.html(`<b class="text-danger">Icra edilir</b>`),
-                    gridjs.html(`<button class="btn btn-sm btn-success"><i class="fa fa-eye"></i></button>`),
+                    gridjs.html(`
+                    <button class="btn btn-sm btn-success DetailedInfoOrder" 
+                    data-user-id="${card.userId}"
+                    data-user-fullname="${card.user.name} ${card.user.lastname}"
+                    data-user-phone="${card.user.phone}"
+                    data-user-email="${card.user.email}"
+                    data-user-regdate="${moment(card.user.createdAt).local('az').format('LL')}"
+                    data-user-adress="${card.user.adress}"
+                    data-product-name="${card.product.name_az}"
+                    data-product-price="${card.product.price}"
+                    data-order-count="${card.productCount}"
+                    >
+                    <i class="fa fa-eye"></i></button>`),
                 ])
           },
           pagination: { limit: 7 }
-      }).render(document.getElementById("ordersTable"));
-      $("table.gridjs-table").css({'width' : '100%'})
+    }).render(document.getElementById("ordersTable"));
+    $(document).on("click", ".DetailedInfoOrder", function(e) {
+        e.preventDefault();
+        $(`input[name="order_uniq_id"]`).val($(this).data("user-id"))
+        $("#OrderInfoModal").modal("show");
+        $("#order_username_input").val($(this).data("user-fullname"))
+        $("#order_email_input").val($(this).data("user-email"))
+        $("#order_phone_input").val($(this).data("user-phone"))
+        $("#order_address_input").val($(this).data("user-adress"))
+        $("#order_registerdate_input").val($(this).data("user-regdate"))
+        //Product
+        $("#order_product_name_input").val($(this).data("product-name"))
+        $("#order_product_price_input").val(`${$(this).data("product-price")} AZN`);
+        $("#order_count_input").val($(this).data("order-count"))
+    })
 }
 
 var ProducDescriptionAZEditor = [];
