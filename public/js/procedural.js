@@ -461,7 +461,7 @@ if(window.location.pathname === "/dashboard/orders") {
                     `${card.product.price}`,
                     card.productCount,
                     gridjs.html(`${moment(card.createdAt).local('az').format('LL')} <span style="display: none;">${$("#loader-cs").hide()}</span>`),
-                    gridjs.html(`<b class="text-danger">Icra edilir</b>`),
+                    gridjs.html(`${card.status === false ? '<b class="text-danger">Icra edilir</b>' : '<b class="text-success">Tamamlanıb</b>'}`),
                     gridjs.html(`
                     <button class="btn btn-sm btn-success DetailedInfoOrder" 
                     data-user-id="${card.userId}"
@@ -472,8 +472,10 @@ if(window.location.pathname === "/dashboard/orders") {
                     data-user-adress="${card.user.adress}"
                     data-product-name="${card.product.name_az}"
                     data-product-price="${card.product.price}"
+                    data-order-id="${card.uniq_id}"
                     data-order-count="${card.productCount}"
-                    >
+                    data-order-addr="${card.orderAdress}"
+                    data-order-status="${card.status}">
                     <i class="fa fa-eye"></i></button>`),
                 ])
           },
@@ -481,7 +483,7 @@ if(window.location.pathname === "/dashboard/orders") {
     }).render(document.getElementById("ordersTable"));
     $(document).on("click", ".DetailedInfoOrder", function(e) {
         e.preventDefault();
-        $(`input[name="order_uniq_id"]`).val($(this).data("user-id"))
+        $(`input[name="order_uniq_id"]`).val($(this).data("order-id"))
         $("#OrderInfoModal").modal("show");
         $("#order_username_input").val($(this).data("user-fullname"))
         $("#order_email_input").val($(this).data("user-email"))
@@ -492,6 +494,36 @@ if(window.location.pathname === "/dashboard/orders") {
         $("#order_product_name_input").val($(this).data("product-name"))
         $("#order_product_price_input").val(`${$(this).data("product-price")} AZN`);
         $("#order_count_input").val($(this).data("order-count"))
+        $("#order_ch_address_input").val($(this).data("order-addr"))
+        let ord_st__ = $(this).data("order-status");
+        $("#order_status_dropdown .order_status_init")
+        .text(`${ord_st__ == false ? 'Icra edilir' : 'Tamamlanıb'}`)
+    })
+    $("#order_status_dropdown .dropdown-item").click(function() {
+        let slct_status__ = $(this).data("status");
+        $("#order_status_dropdown .order_status_init").text($(this).text());
+        $.ajax({
+            type: "PUT",
+            url: `${api_base_url}/stroyka/update/checkoutStatus`,
+            data: {
+                uniq_id: $(`input[name="order_uniq_id"]`).val(),
+                status: slct_status__
+            },
+            success: function(data, textStatus, xhr) {
+                if(xhr.status === 200) {
+                    Swal.fire(
+                        'Məlumat',
+                        'Status yeniləndi',
+                        'success'
+                    );
+                    ordersTable.forceRender(document.getElementById("ordersTable"));
+                }
+                else {
+                    console.log(data, textStatus, xhr);
+                    alert("Xəta baş verdi...")
+                }
+            }
+        })
     })
 }
 

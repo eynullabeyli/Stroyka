@@ -64,6 +64,22 @@
                                 <input type="text" class="form-control" id="order_count_input" disabled>
                                 <label for="order_count_input">Sifariş sayı</label>
                             </div>
+                            <div class="form-floating mt-2">
+                                <input type="text" class="form-control" id="order_ch_address_input" disabled>
+                                <label for="order_ch_address_input">Sifariş ünvanı</label>
+                            </div>
+                            <div class="mt-2">
+                                <label class="mb-1">Status</label>
+                                <div class="dropdown" id="order_status_dropdown">
+                                    <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                        <span class="order_status_init">Icra edilir</span>
+                                    </button>
+                                    <ul class="dropdown-menu">
+                                        <li><button class="dropdown-item" data-status="0" type="button">Icra edilir</button></li>
+                                        <li><button class="dropdown-item" data-status="1" type="button">Tamamlanıb</button></li>
+                                    </ul>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
