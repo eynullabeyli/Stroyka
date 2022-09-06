@@ -2,6 +2,9 @@ module.exports = (app) => {
     app.get('/', (req, res) => {
         res.redirect('./dashboard/slider')
     });
+    app.get('/login', (req, res) => {
+        res.render('pages/auth/login', {layout: false})
+    });
     app.get('/main', (req, res) => {
         res.render('pages/dashboard/main')
     });
