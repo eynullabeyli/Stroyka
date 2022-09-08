@@ -848,7 +848,10 @@ if(window.location.pathname === "/dashboard/team") {
                     card.profession.az,
                     card.profession.en,
                     card.profession.ru,
-                    gridjs.html(`<button type="button" data-id="${card.uniq_id}" class="btn btn-sm btn-danger DeleteTeamBTN"><i class="fa fa-trash"></i> Sil</button>`)
+                    gridjs.html(`
+                        <button type="button" data-id="${card.uniq_id}" class="btn btn-sm btn-danger DeleteTeamBTN"><i class="fa fa-trash"></i> Sil</button>
+                        <button type="button" data-id="${card.uniq_id}" class="btn btn-sm btn-warning EditTeamBTN"><i class="fa fa-pencil"></i> Sil</button>
+                    `)
                 ])
           }
     }).render(document.getElementById("teamTable")); 
