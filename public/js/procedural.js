@@ -830,7 +830,7 @@ if(window.location.pathname === "/dashboard/contact") {
                 }
                 else {
                     console.log(data, textStatus, xhr);
-                    alert("Xəta baş verdi...")
+                    alert("Xəta baş verdi...");
                 }
             }
         })
