@@ -375,7 +375,9 @@ if(window.location.pathname === "/dashboard/banner") {
                     `${JSON.parse(card.title).az}`,
                     `${JSON.parse(card.title).en}`,
                     `${JSON.parse(card.title).ru}`,
-                    gridjs.html(`<button type="button" data-id="${card.uniq_id}" class="btn btn-danger DeleteBannerBTN">Sil</button>`)
+                    gridjs.html(`
+                    <button type="button" data-id="${card.uniq_id}" class="btn btn-sm btn-danger DeleteBannerBTN"><i class="fa fa-trash"></i> Sil</button>
+                    <button type="button" data-id="${card.uniq_id}" class="btn btn-sm btn-warning EditTeamBTN" data-action="edit"><i class="fa fa-pencil"></i></button>`)
                 ])
           }
     }).render(document.getElementById("bannerListTable"));
@@ -850,7 +852,7 @@ if(window.location.pathname === "/dashboard/team") {
                     card.profession.ru,
                     gridjs.html(`
                         <button type="button" data-id="${card.uniq_id}" class="btn btn-sm btn-danger DeleteTeamBTN"><i class="fa fa-trash"></i> Sil</button>
-                        <button type="button" data-id="${card.uniq_id}" class="btn btn-sm btn-warning EditTeamBTN"><i class="fa fa-pencil"></i> Sil</button>
+                        <button type="button" data-id="${card.uniq_id}" class="btn btn-sm btn-warning EditTeamBTN" data-action="edit"><i class="fa fa-pencil"></i></button>
                     `)
                 ])
           }
