@@ -304,7 +304,9 @@ if(window.location.pathname === "/dashboard/slider") {
                     `${JSON.parse(card.title).az}`,
                     `${JSON.parse(card.title).en}`,
                     `${JSON.parse(card.title).ru}`,
-                    gridjs.html(`<button type="button" data-id="${card.uniq_id}" class="btn btn-danger DeleteSliderBTN">Sil</button>`)
+                    gridjs.html(`
+                    <button type="button" data-id="${card.uniq_id}" class="btn btn-sm btn-danger DeleteSliderBTN"><i class="fa fa-trash"></i> Sil</button>
+                    <button type="button" data-id="${card.uniq_id}" class="btn btn-sm btn-warning EditSliderBTN" data-action="edit"><i class="fa fa-pencil"></i></button>`)
                 ])
           }
     }).render(document.getElementById("sliderListTable"));
