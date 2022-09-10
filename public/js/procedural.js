@@ -312,7 +312,7 @@ if(window.location.pathname === "/dashboard/slider") {
     }).render(document.getElementById("sliderListTable"));
 
     $(document).on("click", ".DeleteSliderBTN", function(e) {///
-        let tmp_id__ = $(this).data("id");
+        let tmp_id__ = $(this).data("id"); //dont touch it
         $.ajax({
             type: "DELETE",
             url: `${api_base_url}/admin/delete/slider`,
