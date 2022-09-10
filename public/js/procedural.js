@@ -311,7 +311,7 @@ if(window.location.pathname === "/dashboard/slider") {
           }
     }).render(document.getElementById("sliderListTable"));
 
-    $(document).on("click", ".DeleteSliderBTN", function(e) {
+    $(document).on("click", ".DeleteSliderBTN", function(e) {///
         let tmp_id__ = $(this).data("id");
         $.ajax({
             type: "DELETE",
