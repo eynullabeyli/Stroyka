@@ -68,7 +68,9 @@ if(window.location.pathname === "/dashboard/category") {
                     card.name_en,
                     card.name_ru,
                     card.slug,
-                    gridjs.html(`<button type="button" data-id="${card.uniq_id}" class="btn btn-danger DeleteCategoryBTN">Sil</button>`)
+                    gridjs.html(`
+                    <button type="button" data-id="${card.uniq_id}" class="btn btn-sm btn-danger DeleteCategoryBTN">Sil</button>
+                    <button type="button" data-id="${card.uniq_id}" class="btn btn-sm btn-warning EditCatBTN" data-action="edit"><i class="fa fa-pencil"></i></button>`)
                 ])
           }
     }).render(document.getElementById("categoryTable"));
@@ -83,7 +85,9 @@ if(window.location.pathname === "/dashboard/category") {
                     card.name_en,
                     card.name_ru,
                     card.slug,
-                    gridjs.html(`<button type="button" data-id="${card.uniq_id}" class="btn btn-danger DeleteSubCategoryBTN">Sil</button>`)
+                    gridjs.html(`
+                    <button type="button" data-id="${card.uniq_id}" class="btn btn-sm btn-danger DeleteSubCategoryBTN">Sil</button>
+                    <button type="button" data-id="${card.uniq_id}" class="btn btn-sm btn-warning EditCatBTN" data-action="edit"><i class="fa fa-pencil"></i></button>`)
                 ])
           }
     }).render(document.getElementById("subcategoryTable"));
@@ -98,7 +102,9 @@ if(window.location.pathname === "/dashboard/category") {
                     card.name_en,
                     card.name_ru,
                     card.slug,
-                    gridjs.html(`<button type="button" data-id="${card.uniq_id}" class="btn btn-danger DeleteAltCategoryBTN">Sil</button>`)
+                    gridjs.html(`
+                    <button type="button" data-id="${card.uniq_id}" class="btn btn-sm btn-danger DeleteAltCategoryBTN">Sil</button>
+                    <button type="button" data-id="${card.uniq_id}" class="btn btn-sm btn-warning EditCatBTN" data-action="edit"><i class="fa fa-pencil"></i></button>`)
                 ])
           }
     }).render(document.getElementById("altcategoryTable"));
@@ -311,7 +317,7 @@ if(window.location.pathname === "/dashboard/slider") {
           }
     }).render(document.getElementById("sliderListTable"));
 
-    $(document).on("click", ".DeleteSliderBTN", function(e) {///
+    $(document).on("click", ".DeleteSliderBTN", function(e) {
         let tmp_id__ = $(this).data("id"); //dont touch it
         $.ajax({
             type: "DELETE",
