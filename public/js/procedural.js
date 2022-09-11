@@ -108,6 +108,13 @@ if(window.location.pathname === "/dashboard/category") {
                 ])
           }
     }).render(document.getElementById("altcategoryTable"));
+
+    $(document).on("click", ".EditCatBTN", function() {
+        $(`#cat_az_name_input`).val('');
+        $(`#cat_en_name_input`).val('');
+        $(`#cat_ru_name_input`).val('');
+        $("#CatInfoModal").modal("show")
+    });
 }
 
 $(document).on("click", ".DeleteCategoryBTN", function(e) {
