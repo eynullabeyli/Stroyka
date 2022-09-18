@@ -338,6 +338,10 @@ if(window.location.pathname === "/dashboard/slider") {
             }
         })
     });
+
+    $(document).on("click", ".EditSliderBTN", function() {
+        $("#SliderrModal").modal("show");
+    })
 }
 
 /* BANNER SECTION */
