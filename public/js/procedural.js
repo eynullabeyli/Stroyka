@@ -396,12 +396,12 @@ if(window.location.pathname === "/dashboard/banner") {
                     `${JSON.parse(card.title).ru}`,
                     gridjs.html(`
                     <button type="button" data-id="${card.uniq_id}" class="btn btn-sm btn-danger DeleteBannerBTN"><i class="fa fa-trash"></i> Sil</button>
-                    <button type="button" data-id="${card.uniq_id}" class="btn btn-sm btn-warning EditTeamBTN" data-action="edit"><i class="fa fa-pencil"></i></button>`)
+                    <button type="button" data-id="${card.uniq_id}" class="btn btn-sm btn-warning EditBannerBTN" data-action="edit"><i class="fa fa-pencil"></i></button>`)
                 ])
           }
     }).render(document.getElementById("bannerListTable"));
 
-    $(document).on("click", ".DeleteBannerBTN", function(e) {
+    $(document).on("click", ".DeleteBannerBTN", function() {
         let tmp_id__ = $(this).data("id");
         $.ajax({
             type: "DELETE",
@@ -415,6 +415,10 @@ if(window.location.pathname === "/dashboard/banner") {
             }
         })
     });
+
+    $(document).on("click", ".EditBannerBTN", function() {
+        $("#BannerModal").modal("show")
+    })
 }
 
 if(window.location.pathname === "/dashboard/about") {

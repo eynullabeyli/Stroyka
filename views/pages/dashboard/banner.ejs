@@ -54,39 +54,57 @@
 </main>
 
 <div class="modal" tabindex="-1" id="BannerModal">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title">Baner məlumatları yenilə</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-            <input type="hidden" name="banner_uniq_id">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Baner məlumatları yenilə</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <input type="hidden" name="banner_uniq_id">
                 <div class="row">
-                <div class="col-md-12">
-                    <div class="card">
-                        <div class="card-body">
-                            <div class="form-floating mb-2">
-                                <input type="text" class="form-control" id="title_az_name_input">
-                                <label for="title_az_name_input">Başlıq AZ</label>
+                    <div class="col-md-6">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="form-floating mb-2">
+                                    <input type="text" class="form-control" id="title_az_name_input">
+                                    <label for="title_az_name_input">Başlıq AZ</label>
+                                </div>
+                                <div class="form-floating mb-2">
+                                    <input type="text" class="form-control" id="title_en_name_input">
+                                    <label for="title_en_name_input">Başlıq EN</label>
+                                </div>
+                                <div class="form-floating mb-2">
+                                    <input type="text" class="form-control" id="title_ru_name_input">
+                                    <label for="title_ru_name_input">Başlıq RU</label>
+                                </div>
                             </div>
-                            <div class="form-floating mb-2">
-                                <input type="text" class="form-control" id="title_en_name_input">
-                                <label for="title_en_name_input">Başlıq EN</label>
-                            </div>
-                            <div class="form-floating mb-2">
-                                <input type="text" class="form-control" id="title_ru_name_input">
-                                <label for="title_ru_name_input">Başlıq RU</label>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="form-floating mb-2">
+                                    <textarea class="form-control" id="edit_banner_DescriptionAZInput" style="height: 100px" spellcheck="false"></textarea>
+                                    <label for="edit_banner_DescriptionAZInput">Açıqlama AZ</label>
+                                </div>
+                                <div class="form-floating mb-2">
+                                    <textarea class="form-control" id="edit_banner_DescriptionENInput" style="height: 100px" spellcheck="false"></textarea>
+                                    <label for="edit_banner_DescriptionENInput">Açıqlama EN</label>
+                                </div>
+                                <div class="form-floating mb-2">
+                                    <textarea class="form-control" id="edit_banner_DescriptionRUInput" style="height: 100px" spellcheck="false"></textarea>
+                                    <label for="edit_banner_DescriptionRUInput">Açıqlama RU</label>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-success" data-bs-dismiss="modal">Tamamla</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Bağla</button>
+            </div>
         </div>
-        <div class="modal-footer">
-            <button type="button" class="btn btn-success" data-bs-dismiss="modal">Tamamla</button>
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Bağla</button>
-        </div>
-      </div>
     </div>
-  </div>
+</div>
