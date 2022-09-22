@@ -439,6 +439,7 @@ if(window.location.pathname === "/dashboard/about") {
     /* UPDATE EXISTING ABOUT PAGE TEXT */
     $("#AboutUs").submit(function(e) {
         e.preventDefault();
+        $('button[type="submit"] svg').addClass("fa-spin");
         let tmp_obj__ = {
             uniq_id: $(`input[name="uniq_id"]`).val(),
             title: {
@@ -458,6 +459,7 @@ if(window.location.pathname === "/dashboard/about") {
             data: tmp_obj__,
             success: function(data, textStatus, xhr) {
                 if(xhr.status === 200) {
+                    $('button[type="submit"] svg').removeClass("fa-spin");
                     Swal.fire(
                         'Məlumat',
                         'Haqqımızda məlumatları uğurla yaradıldı',
