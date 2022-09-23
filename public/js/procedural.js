@@ -60,6 +60,11 @@ var altcategoryTable;
 if(window.location.pathname === "/dashboard/category") {
     categoryTable = new gridjs.Grid({
         columns: ["Adı AZ", "Adı EN", "Adı RU", "Slug", "---"],
+        pagination: {
+            enabled: true,
+            limit: 3,
+            summary: false
+        },
         server: {
             url: `${api_base_url}/stroyka/get/categories`,
             then: data => data.map(card => 
@@ -77,6 +82,11 @@ if(window.location.pathname === "/dashboard/category") {
 
     subcategoryTable = new gridjs.Grid({
         columns: ["Adı AZ", "Adı EN", "Adı RU", "Slug", "---"],
+        pagination: {
+            enabled: true,
+            limit: 3,
+            summary: false
+        },
         server: {
             url: `${api_base_url}/stroyka/get/subcategories`,
             then: data => data.map(card => 
@@ -94,6 +104,11 @@ if(window.location.pathname === "/dashboard/category") {
 
     altcategoryTable = new gridjs.Grid({
         columns: ["Adı AZ", "Adı EN", "Adı RU", "Slug", "---"],
+        pagination: {
+            enabled: true,
+            limit: 3,
+            summary: false
+        },
         server: {
             url: `${api_base_url}/stroyka/get/altcategories`,
             then: data => data.map(card => 
