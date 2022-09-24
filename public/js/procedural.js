@@ -803,6 +803,11 @@ if(window.location.pathname === "/dashboard/form-request") {
         columns: ["Tam ad", "Email", "Əlaəq nömrəsi", "Mesaj", "Mənbə"],
         server: {
             url: `${api_base_url}/admin/get/contacUs`,
+            pagination: {
+                enabled: true,
+                limit: 3,
+                summary: false
+            },
             then: data => data.map(card =>
                 [
                     `${card.name}`,
