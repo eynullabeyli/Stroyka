@@ -583,6 +583,11 @@ if(window.location.pathname === "/dashboard/products") {
     //Product List Table
     var ProductListTable = new gridjs.Grid({
         columns: ["Məhsulun adı", "Qiyməti", "Status", "---"],
+        pagination: {
+            enabled: true,
+            limit: 3,
+            summary: false
+        },
         server: {
             url: `${api_base_url}/stroyka/get/products/all`,
             then: data => data.map(list => 
@@ -801,13 +806,13 @@ if(window.location.pathname === "/dashboard/products") {
 if(window.location.pathname === "/dashboard/form-request") {
     var formRequest = new gridjs.Grid({
         columns: ["Tam ad", "Email", "Əlaəq nömrəsi", "Mesaj", "Mənbə"],
+        pagination: {
+            enabled: true,
+            limit: 3,
+            summary: false
+        },
         server: {
             url: `${api_base_url}/admin/get/contacUs`,
-            pagination: {
-                enabled: true,
-                limit: 3,
-                summary: false
-            },
             then: data => data.map(card =>
                 [
                     `${card.name}`,
