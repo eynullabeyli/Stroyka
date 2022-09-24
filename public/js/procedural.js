@@ -595,7 +595,8 @@ if(window.location.pathname === "/dashboard/products") {
                     list.name_az,
                     `${list.price}`,
                     `${list.status}`,
-                    gridjs.html(`<button class="btn btn-sm btn-danger DeleteProductBTN" data-uniq-id="${list.uniq_id}">Sil</button>`)
+                    gridjs.html(`<button class="btn btn-sm btn-danger DeleteProductBTN" data-uniq-id="${list.uniq_id}">Sil</button>
+                    <button class="btn btn-sm btn-warning EditProductBTN" data-uniq-id="${list.uniq_id}"><i class="fa fa-pencil"></i></button>`)
                 ])
           }
       }).render(document.getElementById("ProductListTable"));
