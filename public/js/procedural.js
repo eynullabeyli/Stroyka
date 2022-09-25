@@ -802,6 +802,10 @@ if(window.location.pathname === "/dashboard/products") {
             }
         })
     })
+    $(document).on("click", ".EditProductBTN", function() {
+        var tmp_id__ = $(this).data("uniq-id");
+        
+    })
 }
 
 if(window.location.pathname === "/dashboard/form-request") {
@@ -974,7 +978,12 @@ if(window.location.pathname === "/dashboard/team") {
                 }
             }
         })
-    })
+    });
+    $(document).on("click", ".EditTeamBTN", function() {
+        var id__ = $(this).data("id");
+        $("#EditTeamModal").modal("show");
+        $('#EditNewTeamForm input[name="edit_team_id"]').val(id__)
+    });
 }
 
 $(document).ready(function() {

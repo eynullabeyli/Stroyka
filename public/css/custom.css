@@ -9,3 +9,7 @@ table.gridjs-table {
 }
 
 /* enable */
+
+td.gridjs-td {
+    font-size: 14px;
+}

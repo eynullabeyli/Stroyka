@@ -20,35 +20,67 @@
 </main>
 <div class="modal" tabindex="-1" id="AddTeamModal">
     <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title">Yeni şəxs əlavə et</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Yeni şəxs əlavə et</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form id="AddNewTeamForm" enctype="multipart/form-data">
+                <div class="modal-body">
+                    <div class="input-group mb-2">
+                        <input type="text" class="form-control" placeholder="Tam ad" name="name_input">
+                    </div>
+                    <div class="input-group mb-2">
+                        <input type="text" class="form-control" placeholder="Peşə AZ" name="profession_az_input">
+                    </div>
+                    <div class="input-group mb-2">
+                        <input type="text" class="form-control" placeholder="Peşə EN" name="profession_en_input">
+                    </div>
+                    <div class="input-group mb-2">
+                        <input type="text" class="form-control" placeholder="Peşə RU" name="profession_ru_input">
+                    </div>
+                    <div class="input-group mb-2">
+                        <label class="input-group-text" for="imageFileInput">Şəkil</label>
+                        <input type="file" class="form-control" id="imageFileInput" accept="image/png, image/jpeg" required>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Bağla</button>
+                    <button type="submit" class="btn btn-primary">Tamamla</button>
+                </div>
+            </form>
         </div>
-        <form id="AddNewTeamForm" enctype="multipart/form-data">
-            <div class="modal-body">
-                <div class="input-group mb-2">
-                    <input type="text" class="form-control" placeholder="Tam ad" name="name_input">
-                </div>
-                <div class="input-group mb-2">
-                    <input type="text" class="form-control" placeholder="Peşə AZ" name="profession_az_input">
-                </div>
-                <div class="input-group mb-2">
-                    <input type="text" class="form-control" placeholder="Peşə EN" name="profession_en_input">
-                </div>
-                <div class="input-group mb-2">
-                    <input type="text" class="form-control" placeholder="Peşə RU" name="profession_ru_input">
-                </div>
-                <div class="input-group mb-2">
-                    <label class="input-group-text" for="imageFileInput">Şəkil</label>
-                    <input type="file" class="form-control" id="imageFileInput" accept="image/png, image/jpeg" required>
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Bağla</button>
-                <button type="submit" class="btn btn-primary">Tamamla</button>
-            </div>
-        </form>
-      </div>
     </div>
-  </div>
+</div>
+
+<div class="modal" tabindex="-1" id="EditTeamModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Şəxs məlumatlarını yenilə</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form id="EditNewTeamForm" enctype="multipart/form-data">
+                <input type="hidden" name="edit_team_id">
+                <div class="modal-body">
+                    <div class="input-group mb-2">
+                        <input type="text" class="form-control" placeholder="Tam ad" name="name_input">
+                    </div>
+                    <div class="input-group mb-2">
+                        <input type="text" class="form-control" placeholder="Peşə AZ" name="profession_az_input">
+                    </div>
+                    <div class="input-group mb-2">
+                        <input type="text" class="form-control" placeholder="Peşə EN" name="profession_en_input">
+                    </div>
+                    <div class="input-group mb-2">
+                        <input type="text" class="form-control" placeholder="Peşə RU" name="profession_ru_input">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Bağla</button>
+                    <button type="submit" class="btn btn-primary">Tamamla</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
