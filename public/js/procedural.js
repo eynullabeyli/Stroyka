@@ -39,7 +39,7 @@ $(`#NewAltCategoryForm select[name="alt_up_category_selected"]`).on("change", fu
 /* USERS LIST DATA FOR GRID */
 if(window.location.pathname === "/dashboard/users") {
     var usersTable = new gridjs.Grid({
-        columns: ["Tam adı", "Əlaqə nömrəsi", "E-poçt", "Ünvan"],
+        columns: ["Tam adı", "Əlaqə nömrəsi", "E-poçt", "Ünvan", "Qeydiyyatdan keçmə tarixi"],
         server: {
             url: `${api_base_url}/stroyka/users/list`,
             then: data => data.map(card => 
@@ -48,6 +48,7 @@ if(window.location.pathname === "/dashboard/users") {
                     card.phone,
                     card.email,
                     card.adress,
+                    moment(card.createdAt).lang("AZ").format("LLL"),
                 ])
         },
         pagination: { limit: 7 }
@@ -907,7 +908,7 @@ if(window.location.pathname === "/dashboard/team") {
                     card.profession.ru,
                     gridjs.html(`
                         <button type="button" data-id="${card.uniq_id}" class="btn btn-sm btn-danger DeleteTeamBTN"><i class="fa fa-trash"></i> Sil</button>
-                        <button type="button" data-id="${card.uniq_id}" class="btn btn-sm btn-warning EditTeamBTN" data-action="edit"><i class="fa fa-pencil"></i></button>
+                        <!-- <button type="button" data-id="${card.uniq_id}" class="btn btn-sm btn-warning EditTeamBTN" data-action="edit"><i class="fa fa-pencil"></i></button> -->
                     `)
                 ])
           }
