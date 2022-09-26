@@ -335,7 +335,7 @@ if(window.location.pathname === "/dashboard/slider") {
                     `${JSON.parse(card.title).ru}`,
                     gridjs.html(`
                     <button type="button" data-id="${card.uniq_id}" class="btn btn-sm btn-danger DeleteSliderBTN"><i class="fa fa-trash"></i> Sil</button>
-                    <button type="button" data-id="${card.uniq_id}" class="btn btn-sm btn-warning EditSliderBTN" data-action="edit"><i class="fa fa-pencil"></i></button>`)
+                    <!-- <button type="button" data-id="${card.uniq_id}" class="btn btn-sm btn-warning EditSliderBTN" data-action="edit"><i class="fa fa-pencil"></i></button> -->`)
                 ])
           }
     }).render(document.getElementById("sliderListTable"));
@@ -597,7 +597,11 @@ if(window.location.pathname === "/dashboard/products") {
                     `${list.price}`,
                     `${list.status}`,
                     gridjs.html(`<button class="btn btn-sm btn-danger DeleteProductBTN" data-uniq-id="${list.uniq_id}">Sil</button>
-                    <button class="btn btn-sm btn-warning EditProductBTN" data-uniq-id="${list.uniq_id}"><i class="fa fa-pencil"></i></button>`)
+                    <button class="btn btn-sm btn-warning EditProductBTN"
+                    data-name-az="${list.name_az}
+                    data-name-en="${list.name_en}
+                    data-name-ru="${list.name_ru}
+                    data-uniq-id="${list.uniq_id}"><i class="fa fa-pencil"></i></button>`)
                 ])
           }
       }).render(document.getElementById("ProductListTable"));
