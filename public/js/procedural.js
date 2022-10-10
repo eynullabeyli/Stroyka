@@ -75,8 +75,13 @@ if(window.location.pathname === "/dashboard/category") {
                     card.name_ru,
                     card.slug,
                     gridjs.html(`
-                    <button type="button" data-id="${card.uniq_id}" class="btn btn-sm btn-danger DeleteCategoryBTN">Sil</button>
-                    <button type="button" data-id="${card.uniq_id}" class="btn btn-sm btn-warning EditCatBTN" data-action="edit"><i class="fa fa-pencil"></i></button>`)
+                    <button type="button
+                    data-id="${card.uniq_id}" class="btn btn-sm btn-danger DeleteCategoryBTN">Sil</button>
+                    <button type="button"
+                    data-id="${card.uniq_id}"
+                    data-name-az="${card.name_az}"
+                    data-name-en="${card.name_en}"
+                    data-name-ru="${card.name_ru}" class="btn btn-sm btn-warning EditCatBTN" data-action="edit"><i class="fa fa-pencil"></i></button>`)
                 ])
           }
     }).render(document.getElementById("categoryTable"));
@@ -126,9 +131,10 @@ if(window.location.pathname === "/dashboard/category") {
     }).render(document.getElementById("altcategoryTable"));
 
     $(document).on("click", ".EditCatBTN", function() {
-        $(`#cat_az_name_input`).val('');
-        $(`#cat_en_name_input`).val('');
-        $(`#cat_ru_name_input`).val('');
+        $(`#cat_az_name_input`).val($(this).data("name-az"));
+        $(`#cat_en_name_input`).val($(this).data("name-en"));
+        $(`#cat_ru_name_input`).val($(this).data("name-ru"));
+        
         $("#CatInfoModal").modal("show")
     });
 }
@@ -598,13 +604,17 @@ if(window.location.pathname === "/dashboard/products") {
                     `${list.status}`,
                     gridjs.html(`<button class="btn btn-sm btn-danger DeleteProductBTN" data-uniq-id="${list.uniq_id}">Sil</button>
                     <button class="btn btn-sm btn-warning EditProductBTN"
-                    data-name-az="${list.name_az}
-                    data-name-en="${list.name_en}
-                    data-name-ru="${list.name_ru}
-                    data-uniq-id="${list.uniq_id}"><i class="fa fa-pencil"></i></button>`)
+                    data-uniq-id="${list.uniq_id}"
+                    data-slug="${list.slug}"
+                    ><i class="fa fa-pencil"></i></button>`)
                 ])
           }
       }).render(document.getElementById("ProductListTable"));
+    
+    $(document).on("click", ".EditProductBTN", function(event) {
+        let ds__ = $(this).data("slug");
+        console.log(ds__);
+    })
     // Clean sub category while selecting up 
     $(`select[name="up_cat_for_product"]`).on("change", function(e) {
         $(`select[name="sub_cat_for_product"]`).html('');
