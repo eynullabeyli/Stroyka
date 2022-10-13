@@ -236,3 +236,242 @@
         </div>
     </div>
 </main>
+
+
+
+<div class="modal" id="EditProductModal">
+    <div class="modal-dialog modal-lg" style="max-width: 1200px;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div>Seçilən məhsul: <span></span></div>
+            </div>
+            <div class="modal-body">
+                <form id="EditProductForm" enctype="multipart/form-data">
+                    <div class="row mt-3">
+                        <div class="col-md-6">
+                            <div class="form-floating mb-3">
+                                <select class="form-select" name="up_cat_for_edit_product" id="up_cat_for_edit_product">
+                                    <option disabled="" selected="">Seçimi edin</option>
+                                </select>
+                                <label for="up_cat_for_edit_product">Üst kateqoriya</label>
+                            </div>
+                            <div class="form-floating mb-3">
+                                <select class="form-select" name="sub_cat_for_edit_product" id="sub_cat_for_edit_product">
+                                    <option disabled="" selected="">Seçimi edin</option>
+                                </select>
+                                <label for="sub_cat_for_edit_product">Sub kateqoriya</label>
+                            </div>
+                            <div class="form-floating mb-3">
+                                <select class="form-select" name="alt_cat_for_edit_product" id="alt_cat_for_edit_product">
+                                    <option disabled="" selected="">Seçimi edin</option>
+                                </select>
+                                <label for="alt_cat_for_edit_product">Alt kateqoriya</label>
+                            </div>
+                            <div class="input-group input-group-sm mb-3">
+                                <span class="input-group-text">Məhsul adı AZ: </span>
+                                <input type="text" class="form-control" name="paroduct_name_az_edit_input" required="" minlength="2">
+                            </div>
+                            <div class="input-group input-group-sm mb-3">
+                                <span class="input-group-text">Məhsul adı EN: </span>
+                                <input type="text" class="form-control" name="paroduct_name_en_edit_input" required="" minlength="2">
+                            </div>
+                            <div class="input-group input-group-sm mb-3">
+                                <span class="input-group-text">Məhsul adı RU: </span>
+                                <input type="text" class="form-control" name="paroduct_name_ru_edit_input" required="" minlength="2">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="input-group input-group-sm mb-3">
+                                <span class="input-group-text">Qiymət: </span>
+                                <input type="text" class="form-control" name="product_price_edit_input" required="" minlength="2">
+                            </div>
+                            <div class="input-group input-group-sm mb-3">
+                                <span class="input-group-text">Code: </span>
+                                <input type="text" class="form-control" name="product_code_edit_input" required="" minlength="2">
+                            </div>
+                            <!-- <div class="mb-3">
+                                <label for="formFiles" class="form-label">Məhsul şəkilləri</label>
+                                <input class="form-control form-control-sm" id="formFiles" type="file" accept="image/png, image/jpeg" multiple="">
+                            </div> -->
+                            <div class="input-group input-group-sm mb-3">
+                                <span class="input-group-text">Model: </span>
+                                <input type="text" class="form-control" name="product_model_edit_input" required="" minlength="2">
+                            </div>
+                            <div class="input-group input-group-sm mb-3">
+                                <span class="input-group-text">Weight: </span>
+                                <input type="number" step="0.01" class="form-control" name="product_weight_edit_input" required="" minlength="2">
+                            </div>
+                            <div class="input-group input-group-sm mb-3">
+                                <span class="input-group-text">Istehsalçı: </span>
+                                <input type="text" class="form-control" name="product_manufacturer_edit_input" required="" minlength="2">
+                            </div>
+                            <div class="mt-3">
+                                <div class="form-check">
+                                    <input class="form-check-input" name="isbestseller" type="checkbox" value="" id="isbestseller_edit">
+                                    <label class="form-check-label" for="isbestseller_edit">
+                                        Is bestseller
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" name="isfeatured" type="checkbox" value="" id="isfeatured_edit">
+                                    <label class="form-check-label" for="isfeatured_edit">
+                                        Is featured
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- <div class="col-md-12 mb-2">
+                            <div class="input-group input-group-sm mb-3">
+                                <span class="input-group-text">Slug: </span>
+                                <input type="text" class="form-control" name="paroduct_slug_input" required="" minlength="2">
+                            </div>
+                        </div> -->
+                        <!-- <div class="col-md-12 mb-2">
+                            <div class="row">
+                                <div class="col-md-4 boxel">
+                                    <div id="descriptionListElAZ" class="DescriptionCSFD">
+                                        <label>Açıqlama AZ</label>
+                                        <div class="form-group">
+                                            <div class="input-group mt-1">
+                                                <input type="text" class="form-control spec-title-input" placeholder="title">
+                                            </div>
+                                            <div class="form-floating mt-1">
+                                                <textarea class="form-control spec-context-input" style="height: 100px"></textarea>
+                                                <label>context</label>
+                                            </div>
+                                            <div class="d-grid gap-2 mt-1">
+                                                <button class="btn btn-sm btn-dark AddDescriptionBTN" type="button">Əlavə et</button>
+                                            </div>
+                                        </div>
+                                        <div class="list-of-description"></div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 boxel">
+                                    <div id="descriptionListElEN" class="DescriptionCSFD">
+                                        <label>Açıqlama EN</label>
+                                        <div class="form-group">
+                                            <div class="input-group mt-1">
+                                                <input type="text" class="form-control spec-title-input" placeholder="title">
+                                            </div>
+                                            <div class="form-floating mt-1">
+                                                <textarea class="form-control spec-context-input" style="height: 100px"></textarea>
+                                                <label>context</label>
+                                            </div>
+                                            <div class="d-grid gap-2 mt-1">
+                                                <button class="btn btn-sm btn-dark AddDescriptionBTN" type="button">Əlavə et</button>
+                                            </div>
+                                        </div>
+                                        <div class="list-of-description"></div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 boxel">
+                                    <div id="descriptionListElRU" class="DescriptionCSFD">
+                                        <label>Açıqlama RU</label>
+                                        <div class="form-group">
+                                            <div class="input-group mt-1">
+                                                <input type="text" class="form-control spec-title-input" placeholder="title">
+                                            </div>
+                                            <div class="form-floating mt-1">
+                                                <textarea class="form-control spec-context-input" style="height: 100px"></textarea>
+                                                <label>context</label>
+                                            </div>
+                                            <div class="d-grid gap-2 mt-1">
+                                                <button class="btn btn-sm btn-dark AddDescriptionBTN" type="button">Əlavə et</button>
+                                            </div>
+                                        </div>
+                                        <div class="list-of-description"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div> -->
+                        <!-- <div class="col-md-12 mb-2">
+                            <div class="row">
+                                <div class="col-md-4 boxel">
+                                    <div id="specificationListElAZ">
+                                        <label>Xüsusiyyət AZ</label>
+                                        <div class="card mt-1">
+                                            <div class="card-header">
+                                                <div class="row">
+                                                    <div class="d-flex justify-content-between align-items-start">
+                                                        <div class="input-group">
+                                                            <input type="text" class="form-control spec-title-input" placeholder="title" style="max-width: 100px;">
+                                                            <input type="text" class="form-control spec-context-input" placeholder="context">
+                                                            <button type="button" class="btn btn-outline-secondary">
+                                                                <svg class="svg-inline--fa fa-plus" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="plus" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" data-fa-i2svg="">
+                                                                    <path fill="currentColor" d="M432 256c0 17.69-14.33 32.01-32 32.01H256v144c0 17.69-14.33 31.99-32 31.99s-32-14.3-32-31.99v-144H48c-17.67 0-32-14.32-32-32.01s14.33-31.99 32-31.99H192v-144c0-17.69 14.33-32.01 32-32.01s32 14.32 32 32.01v144h144C417.7 224 432 238.3 432 256z"></path>
+                                                                </svg>
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="card-body">
+                                                <div class="list-group"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 boxel">
+                                    <div id="specificationListElEN">
+                                        <label>Xüsusiyyət EN</label>
+                                        <div class="card mt-1">
+                                            <div class="card-header">
+                                                <div class="row">
+                                                    <div class="d-flex justify-content-between align-items-start">
+                                                        <div class="input-group">
+                                                            <input type="text" class="form-control spec-title-input" placeholder="title" style="max-width: 100px;">
+                                                            <input type="text" class="form-control spec-context-input" placeholder="context">
+                                                            <button type="button" class="btn btn-outline-secondary">
+                                                                <svg class="svg-inline--fa fa-plus" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="plus" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" data-fa-i2svg=""><path fill="currentColor" d="M432 256c0 17.69-14.33 32.01-32 32.01H256v144c0 17.69-14.33 31.99-32 31.99s-32-14.3-32-31.99v-144H48c-17.67 0-32-14.32-32-32.01s14.33-31.99 32-31.99H192v-144c0-17.69 14.33-32.01 32-32.01s32 14.32 32 32.01v144h144C417.7 224 432 238.3 432 256z"></path></svg>
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="card-body">
+                                                <div class="list-group"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 boxel">
+                                    <div id="specificationListElRU">
+                                        <label>Xüsusiyyət RU</label>
+                                        <div class="card mt-1">
+                                            <div class="card-header">
+                                                <div class="row">
+                                                    <div class="d-flex justify-content-between align-items-start">
+                                                        <div class="input-group">
+                                                            <input type="text" class="form-control spec-title-input" placeholder="title" style="max-width: 100px;">
+                                                            <input type="text" class="form-control spec-context-input" placeholder="context">
+                                                            <button type="button" class="btn btn-outline-secondary">
+                                                                <svg class="svg-inline--fa fa-plus" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="plus" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" data-fa-i2svg="">
+                                                                    <path fill="currentColor" d="M432 256c0 17.69-14.33 32.01-32 32.01H256v144c0 17.69-14.33 31.99-32 31.99s-32-14.3-32-31.99v-144H48c-17.67 0-32-14.32-32-32.01s14.33-31.99 32-31.99H192v-144c0-17.69 14.33-32.01 32-32.01s32 14.32 32 32.01v144h144C417.7 224 432 238.3 432 256z"></path>
+                                                                </svg>
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="card-body">
+                                                <div class="list-group"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div> -->
+                        <input type="hidden" name="product_description_edit">
+                        <input type="hidden" name="product_specification_edit">
+                        <input type="hidden" name="isfeatured_real_input_edit">
+                        <input type="hidden" name="isBestseller_real_input_edit">
+                        <input type="hidden" name="product_uniqid_edit_input">
+                        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                            <button class="btn btn-warning btn-block">Tamamla</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

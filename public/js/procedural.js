@@ -134,7 +134,6 @@ if(window.location.pathname === "/dashboard/category") {
         $(`#cat_az_name_input`).val($(this).data("name-az"));
         $(`#cat_en_name_input`).val($(this).data("name-en"));
         $(`#cat_ru_name_input`).val($(this).data("name-ru"));
-        
         $("#CatInfoModal").modal("show")
     });
 }
@@ -150,6 +149,13 @@ $(document).on("click", ".DeleteCategoryBTN", function(e) {
         success: function(data) {
             alert("Kateqoriya silindi");
             categoryTable.forceRender(document.getElementById("categoryTable"));
+        },
+        error: () => {
+            Swal.fire(
+                'Xəta',
+                'Bu kateqoriya silinə bilməz səbəb: əlaqəli bir sub, alt kateqoriya və ya məhsul var',
+                'error'
+            );
         }
     })
 });
@@ -164,6 +170,13 @@ $(document).on("click", ".DeleteSubCategoryBTN", function(e) {
         success: function(data) {
             alert("Sub kateqoriya silindi");
             subcategoryTable.forceRender(document.getElementById("subcategoryTable"));
+        },
+        error: () => {
+            Swal.fire(
+                'Xəta',
+                'Bu kateqoriya silinə bilməz səbəb: əlaqəli alt kateqoriya və ya məhsul var',
+                'error'
+            );
         }
     })
 });
@@ -178,6 +191,13 @@ $(document).on("click", ".DeleteAltCategoryBTN", function(e) {
         success: function(data) {
             alert("Alt kateqoriya silindi");
             altcategoryTable.forceRender(document.getElementById("altcategoryTable"));
+        },
+        error: () => {
+            Swal.fire(
+                'Xəta',
+                'Bu kateqoriya silinə bilməz səbəb: əlaqəli bir sub kateqoriya və ya məhsul var',
+                'error'
+            );
         }
     })
 });
@@ -613,8 +633,164 @@ if(window.location.pathname === "/dashboard/products") {
     
     $(document).on("click", ".EditProductBTN", function(event) {
         let ds__ = $(this).data("slug");
+        $("#loader-cs").show();
+        $.ajax({
+            method: "GET",
+            url: `${api_base_url}/stroyka/get/products/${ds__}`,
+            success: (data) => {
+                console.log(data);
+                $("#EditProductModal .modal-header span").text(data.name_az)
+                $(`input[name="product_uniqid_edit_input"]`).val(data.uniq_id)
+                $(`input[name="paroduct_name_az_edit_input"]`).val(data.name_az)
+                $(`input[name="paroduct_name_en_edit_input"]`).val(data.name_en)
+                $(`input[name="paroduct_name_ru_edit_input"]`).val(data.name_ru)
+                $(`input[name="product_price_edit_input"]`).val(data.price)
+                $(`input[name="product_code_edit_input"]`).val(data.code)
+                $(`input[name="product_model_edit_input"]`).val(data.model)
+                $(`input[name="product_weight_edit_input"]`).val(data.weight)
+                $(`input[name="product_manufacturer_edit_input"]`).val(data.manufacturer)
+                data.isBestseller == true ? $(`#isbestseller_edit`).prop('checked', true) : $(`#isbestseller_edit`).prop('checked', false)
+                data.isFeatured == true ? $(`#isfeatured_edit`).prop('checked', true) : $(`#isfeatured_edit`).prop('checked', false)
+                $(`#up_cat_for_edit_product`).html('');
+                $(`#up_cat_for_edit_product`).append('<option selected value="0">Seçimi edin</option>')
+                $(`#sub_cat_for_edit_product`).html('');
+                $(`#sub_cat_for_edit_product`).append('<option selected value="0">Seçimi edin</option>')
+                $(`#alt_cat_for_edit_product`).html('');
+                $(`#alt_cat_for_edit_product`).append('<option selected value="0">Seçimi edin</option>')
+                $.ajax({
+                    type: "GET",
+                    url: `${api_base_url}/stroyka/get/categories`,
+                    success: function (data_cat, textStatus, xhr) {
+                        $(data_cat).each(function(k,v) {
+                            $(`#up_cat_for_edit_product`)
+                            .append(`<option data-slug="${v.slug}" value="${v.uniq_id}">AZ: ${v.name_az} | EN:  ${v.name_en} | RU:  ${v.name_ru}</option>`);
+                        })
+
+                    },
+                    complete: () => {
+                        $(`#up_cat_for_edit_product option[value="${data.category.uniq_id}"]`).prop('selected', true)
+                        $.ajax({
+                            type: "GET",
+                            url: `${api_base_url}/stroyka/get/getSubCatsByCatSlug/${data.category.slug}`,
+                            success: function (data_sub, textStatus, xhr) {
+                                $(data_sub).each(function(k,v_sub) {
+                                    $(`#sub_cat_for_edit_product`)
+                                    .append(`<option data-slug="${v_sub.slug}" value="${v_sub.uniq_id}">AZ: ${v_sub.name_az} | EN:  ${v_sub.name_en} | RU:  ${v_sub.name_ru}</option>`);
+                                })
+                            },
+                            complete: () => {
+                                $(`#sub_cat_for_edit_product option[value="${data.subcategory.uniq_id}"]`).prop('selected', true)
+                            }
+                        })
+                        $.ajax({
+                            type: "GET",
+                            url: `${api_base_url}/stroyka/get/altcategoriesBySubCatID/${data.subcategory.slug}`,
+                            success: function (data_alt, textStatus, xhr) {
+                                $(data_alt).each(function(k,v_alt) {
+                                    $(`#alt_cat_for_edit_product`)
+                                    .append(`<option data-slug="${v_alt.slug}" value="${v_alt.uniq_id}">AZ: ${v_alt.name_az} | EN:  ${v_alt.name_en} | RU:  ${v_alt.name_ru}</option>`);
+                                })
+                            },
+                            complete: () => {
+                                $(`#alt_cat_for_edit_product option[value="${data.altcategory.uniq_id}"]`).prop('selected', true)
+                                $("#loader-cs").hide();
+                                $("#EditProductModal").modal("show")
+                            }
+                        })
+                    }
+                })
+            },
+            error: () => {
+                Swal.fire(
+                    'Xəta',
+                    'Məhsul məlumatlarını gətirərkən xəta baş verdi',
+                    'error'
+                );
+                $("#EditProductModal").hide();
+                console.log("Somewhile Errors hmm..");
+            },
+            complete: () => {
+                // $("#loader-cs").hide();
+            }
+        })
         console.log(ds__);
+    });
+
+    $("#EditProductForm").submit((e) => {
+        e.preventDefault();
+        var body__edit_product = {
+            "uniq_id": $(`input[name="product_uniqid_edit_input"]`).val(),
+            "name_az": $(`input[name="paroduct_name_az_edit_input"]`).val(),
+            "name_en": $(`input[name="paroduct_name_en_edit_input"]`).val(),
+            "name_ru": $(`input[name="paroduct_name_ru_edit_input"]`).val(),
+            "weight": parseFloat($(`input[name="product_weight_edit_input"]`).val()),
+            "model": $(`input[name="product_model_edit_input"]`).val(),
+            "code": $(`input[name="product_code_edit_input"]`).val(),
+            "price": parseFloat($(`input[name="product_price_edit_input"]`).val()),
+            "manufacturer": $(`input[name="product_manufacturer_edit_input"]`).val(),
+            "isBestseller": detectCheckbox($(`input[name="isBestseller_real_edit_input"]`)),
+            "isFeatured": detectCheckbox($(`input[name="isfeatured_real_edit_input"]`)),
+            "altcat_id": $(`select[name="alt_cat_for_edit_product"]`).val(),
+            "subcat_id": $(`select[name="sub_cat_for_edit_product"]`).val(),
+            "cat_id": $(`select[name="up_cat_for_edit_product"]`).val()
+        };
+        console.log(body__edit_product);
+        $.ajax({
+            method: "PUT",
+            url: `${api_base_url}/admin/update/product`,
+            data: JSON.stringify(body__edit_product),
+            processData: false,
+            contentType: "application/json",
+            success: (data) => {
+                console.log(data);
+            },
+            error: (data) => {
+                console.log(data);
+                console.log("Somewhile Errors hmm..");
+            },
+            complete: (data) => {
+                $("#loader-cs").hide();
+                $("#EditProductModal").modal("hide")
+                ProductListTable.forceRender(document.getElementById("ProductListTable"));
+            }
+        })
     })
+    // Clean sub category while selecting up for edit
+    $(`#up_cat_for_edit_product`).on("change", function(e) {
+        $("#sub_cat_for_edit_product").html('')
+        $(`#sub_cat_for_edit_product`).append('<option selected value="0">Seçimi edin</option>');
+        $(`#alt_cat_for_edit_product`).html('');
+        $(`#alt_cat_for_edit_product`).append('<option selected value="0">Seçimi edin</option>');
+        if($(this).val() !== "0") {
+            $.ajax({
+                type: "GET",
+                url: `${api_base_url}/stroyka/get/getSubCatsByCatSlug/${$(`#up_cat_for_edit_product`).find(':selected').data("slug")}`,
+                success: function (data, textStatus, xhr) {
+                    $(data).each(function(k,v) {
+                        $(`#sub_cat_for_edit_product`)
+                        .append(`<option data-slug="${v.slug}" value="${v.uniq_id}">AZ: ${v.name_az} | EN:  ${v.name_en} | RU:  ${v.name_ru}</option>`);
+                    })
+                }
+            })
+        }
+    });
+    // Clean alt category while selecting sub for edit
+    $(`#sub_cat_for_edit_product`).on("change", function(e) {
+        $(`#alt_cat_for_edit_product`).html('');
+        $(`#alt_cat_for_edit_product`).append('<option selected value="0">Seçimi edin</option>');
+        if($(this).val() !== "0") {
+            $.ajax({
+                type: "GET",
+                url: `${api_base_url}/stroyka/get/altcategoriesBySubCatID/${$(`#sub_cat_for_edit_product`).find(':selected').data("slug")}`,
+                success: function (data_alt_cat_edit, textStatus, xhr) {
+                    $(data_alt_cat_edit).each(function(k_alt_cat_edit,v_alt_cat_edit) {
+                        $(`#alt_cat_for_edit_product`)
+                        .append(`<option data-slug="${v_alt_cat_edit.slug}" value="${v_alt_cat_edit.uniq_id}">AZ: ${v_alt_cat_edit.name_az} | EN:  ${v_alt_cat_edit.name_en} | RU:  ${v_alt_cat_edit.name_ru}</option>`);
+                    })
+                }
+            })
+        }
+    });
     // Clean sub category while selecting up 
     $(`select[name="up_cat_for_product"]`).on("change", function(e) {
         $(`select[name="sub_cat_for_product"]`).html('');
@@ -819,7 +995,6 @@ if(window.location.pathname === "/dashboard/products") {
     })
     $(document).on("click", ".EditProductBTN", function() {
         var tmp_id__ = $(this).data("uniq-id");
-        
     })
 }
 
