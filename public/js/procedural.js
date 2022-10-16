@@ -734,7 +734,7 @@ if(window.location.pathname === "/dashboard/products") {
             "subcat_id": $(`select[name="sub_cat_for_edit_product"]`).val(),
             "cat_id": $(`select[name="up_cat_for_edit_product"]`).val()
         };
-        console.log(body__edit_product);
+        console.log("before payload => ", body__edit_product);
         $.ajax({
             method: "PUT",
             url: `${api_base_url}/admin/update/product`,
@@ -742,14 +742,61 @@ if(window.location.pathname === "/dashboard/products") {
             processData: false,
             contentType: "application/json",
             success: (data) => {
-                console.log(data);
+                console.log("success data => ", data);
+                Swal.fire(
+                    'Məlumat',
+                    'Məhsul məlumatları yeniləndi',
+                    'success'
+                );
+                if($("#formFiles_edit")[0].files.length > 0) {
+                    var UpdateImageBody = new FormData();
+                    UpdateImageBody.append("uniq_id", $(`input[name="product_uniqid_edit_input"]`).val());
+                    $.each(document.getElementById('formFiles_edit').files, function(i, file) {
+                        UpdateImageBody.append('images', file);
+                    });
+                    $.ajax({
+                        method: "PUT",
+                        url: `${api_base_url}/admin/update/product/image`,
+                        processData: false,
+                        contentType: false,
+                        data: UpdateImageBody,
+                        beforeSend: () => {
+                            $("#loader-cs").hide();
+                        },
+                        success: (data) => {
+                            console.log("success data image => ", data);
+                            Swal.fire(
+                                'Məlumat',
+                                'Məhsul şəkillər yeniləndi',
+                                'success'
+                            );
+                        },
+                        error: (data) => {
+                            console.log("error data image => ", data);
+                            Swal.fire(
+                                'Xəta',
+                                'Məhsul şəkilləri yenilənmədi',
+                                'error'
+                            );
+                        },
+                        complete: () => {
+                            $("#loader-cs").hide();
+                        }
+                    })
+                }
+                else {
+                    $("#loader-cs").hide();
+                }
             },
             error: (data) => {
-                console.log(data);
-                console.log("Somewhile Errors hmm..");
+                console.log("error data => ", data);
+                Swal.fire(
+                    'Xəta',
+                    'Məhsul məlumatları yenilənmədi',
+                    'error'
+                );
             },
             complete: (data) => {
-                $("#loader-cs").hide();
                 $("#EditProductModal").modal("hide")
                 ProductListTable.forceRender(document.getElementById("ProductListTable"));
             }
