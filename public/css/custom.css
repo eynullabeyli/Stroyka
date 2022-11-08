@@ -13,3 +13,7 @@ table.gridjs-table {
 td.gridjs-td {
     font-size: 14px;
 }
+
+.InStepProdUpdate {
+    display: none;
+}

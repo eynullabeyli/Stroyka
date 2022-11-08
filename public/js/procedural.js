@@ -635,7 +635,7 @@ if(window.location.pathname === "/dashboard/products") {
         }],
         pagination: {
             enabled: true,
-            limit: 3,
+            limit: 7,
             summary: false
         },
         server: {
@@ -780,6 +780,8 @@ if(window.location.pathname === "/dashboard/products") {
 
     $("#EditProductForm").submit((e) => {
         e.preventDefault();
+        $(`#EditProductForm .OutStepProdUpdate`).hide();
+        $(`#EditProductForm .InStepProdUpdate`).show();
         var body__edit_product = {
             "uniq_id": $(`input[name="product_uniqid_edit_input"]`).val(),
             "name_az": $(`input[name="paroduct_name_az_edit_input"]`).val(),
@@ -861,6 +863,8 @@ if(window.location.pathname === "/dashboard/products") {
             },
             complete: (data) => {
                 $("#EditProductModal").modal("hide")
+                $(`#EditProductForm .OutStepProdUpdate`).show();
+                $(`#EditProductForm .InStepProdUpdate`).hide();
                 ProductListTable.forceRender(document.getElementById("ProductListTable"));
             }
         })
