@@ -772,7 +772,7 @@ if(window.location.pathname === "/dashboard/products") {
                 console.log("Somewhile Errors hmm..");
             },
             complete: () => {
-                // $("#loader-cs").hide();
+                $("#loader-cs").hide();
             }
         })
         console.log(ds__);
