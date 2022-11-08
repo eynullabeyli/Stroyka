@@ -230,7 +230,6 @@ $("#NewUpCategoryForm").submit( (e) => {
                 categoryTable.forceRender(document.getElementById("categoryTable"));
             }
             else {
-                console.log(data, textStatus, xhr);
                 alert("Xəta baş verdi...")
             }
         }
@@ -261,7 +260,6 @@ $("#NewSubCategoryForm").submit( (e) => {
                     subcategoryTable.forceRender(document.getElementById("categoryTable"));
                 }
                 else {
-                    console.log(data, textStatus, xhr);
                     alert("Xəta baş verdi...")
                 }
             }
@@ -294,7 +292,6 @@ $("#NewAltCategoryForm").submit( (e) => {
                     altcategoryTable.forceRender(document.getElementById("altcategoryTable"));
                 }
                 else {
-                    console.log(data, textStatus, xhr);
                     alert("Xəta baş verdi...")
                 }
             }
@@ -303,7 +300,6 @@ $("#NewAltCategoryForm").submit( (e) => {
 });
 
 $(document).on( 'change', `select[name="alt_up_category_selected"]`, function() {
-    console.log("changed");
     $(`select[name="alt_sub_category_selected"]`).val()
 });
 
@@ -342,7 +338,6 @@ if(window.location.pathname === "/dashboard/slider") {
                         sliderListTable.forceRender(document.getElementById("sliderListTable"));
                     }
                     else {
-                        console.log(data, textStatus, xhr);
                         alert("Xəta baş verdi...")
                     }
                 }
@@ -420,7 +415,6 @@ if(window.location.pathname === "/dashboard/banner") {
                     bannerListTable.forceRender(document.getElementById("bannerListTable"));
                 }
                 else {
-                    console.log(data, textStatus, xhr);
                     alert("Xəta baş verdi...")
                 }
             }
@@ -509,7 +503,6 @@ if(window.location.pathname === "/dashboard/about") {
                     )
                 }
                 else {
-                    console.log(data, textStatus, xhr);
                     alert("Xəta baş verdi...")
                 }
             }
@@ -588,7 +581,6 @@ if(window.location.pathname === "/dashboard/orders") {
                     ordersTable.forceRender(document.getElementById("ordersTable"));
                 }
                 else {
-                    console.log(data, textStatus, xhr);
                     alert("Xəta baş verdi...")
                 }
             }
@@ -656,7 +648,7 @@ if(window.location.pathname === "/dashboard/products") {
                     </ul>
                     </div>`),
                     gridjs.html(`<button class="btn btn-sm btn-danger DeleteProductBTN" data-uniq-id="${list.uniq_id}">Sil</button>
-                    <button class="btn btn-sm btn-warning EditProductBTN"
+                    <button type="button" class="btn btn-sm btn-warning ${list.status === "active" ? 'EditProductBTN' : 'ProductIsNotReadyForEdit'}"
                     data-uniq-id="${list.uniq_id}"
                     data-slug="${list.slug}"
                     ><i class="fa fa-pencil"></i></button>`),
@@ -665,6 +657,13 @@ if(window.location.pathname === "/dashboard/products") {
             }
     }).render(document.getElementById("ProductListTable"));
     
+    $(document).on("click", ".ProductIsNotReadyForEdit", function() {
+        Swal.fire(
+            'Məlumat',
+            'Məhsulu yeniləmək üçün aktiv etməlisiniz',
+            'warning'
+        );
+    })
     $(document).on("click", ".ChangeProductStatus", function() {
         var uniq_id__ = $(this).attr("data-uniq-id");
         var status__ = $(this).attr("data-prod-status-return");
@@ -697,7 +696,6 @@ if(window.location.pathname === "/dashboard/products") {
             method: "GET",
             url: `${api_base_url}/stroyka/get/products/${ds__}`,
             success: (data) => {
-                console.log(data);
                 $("#EditProductModal .modal-header span").text(data.name_az)
                 $(`input[name="product_uniqid_edit_input"]`).val(data.uniq_id)
                 $(`input[name="paroduct_name_az_edit_input"]`).val(data.name_az)
@@ -769,13 +767,11 @@ if(window.location.pathname === "/dashboard/products") {
                     'error'
                 );
                 $("#EditProductModal").hide();
-                console.log("Somewhile Errors hmm..");
             },
             complete: () => {
                 $("#loader-cs").hide();
             }
         })
-        console.log(ds__);
     });
 
     $("#EditProductForm").submit((e) => {
@@ -799,7 +795,6 @@ if(window.location.pathname === "/dashboard/products") {
             "cat_id": $(`select[name="up_cat_for_edit_product"]`).val(),
             "slug": $(`input[name="product_slug_input_edit"]`).val().toLowerCase().replace(' ','-')
         };
-        console.log("before payload => ", body__edit_product);
         $.ajax({
             method: "PUT",
             url: `${api_base_url}/admin/update/product`,
@@ -807,7 +802,6 @@ if(window.location.pathname === "/dashboard/products") {
             processData: false,
             contentType: "application/json",
             success: (data) => {
-                console.log("success data => ", data);
                 Swal.fire(
                     'Məlumat',
                     'Məhsul məlumatları yeniləndi',
@@ -829,7 +823,6 @@ if(window.location.pathname === "/dashboard/products") {
                             $("#loader-cs").hide();
                         },
                         success: (data) => {
-                            console.log("success data image => ", data);
                             Swal.fire(
                                 'Məlumat',
                                 'Məhsul şəkillər yeniləndi',
@@ -837,7 +830,6 @@ if(window.location.pathname === "/dashboard/products") {
                             );
                         },
                         error: (data) => {
-                            console.log("error data image => ", data);
                             Swal.fire(
                                 'Xəta',
                                 'Məhsul şəkilləri yenilənmədi',
@@ -854,7 +846,6 @@ if(window.location.pathname === "/dashboard/products") {
                 }
             },
             error: (data) => {
-                console.log("error data => ", data);
                 Swal.fire(
                     'Xəta',
                     'Məhsul məlumatları yenilənmədi',
@@ -1049,7 +1040,6 @@ if(window.location.pathname === "/dashboard/products") {
                     ProductListTable.forceRender(document.getElementById("ProductListTable"));
                 }
                 else {
-                    console.log(data, textStatus, xhr);
                     alert("Xəta baş verdi...")
                 }
             }
@@ -1102,7 +1092,6 @@ if(window.location.pathname === "/dashboard/products") {
                     )
                 }
                 else {
-                    console.log(data, textStatus, xhr);
                     alert("Xəta baş verdi...")
                 }
             },
@@ -1169,7 +1158,6 @@ if(window.location.pathname === "/dashboard/contact") {
                     coordinates__.val(data[0].coordinates);
                 }
                 else {
-                    console.log(data, textStatus, xhr);
                     alert("Xəta baş verdi...")
                 }
             }
@@ -1201,7 +1189,6 @@ if(window.location.pathname === "/dashboard/contact") {
                     getInfoData()
                 }
                 else {
-                    console.log(data, textStatus, xhr);
                     alert("Xəta baş verdi...");
                 }
             }
@@ -1263,7 +1250,6 @@ if(window.location.pathname === "/dashboard/team") {
                         $("#loader-cs").hide();
                     }
                     else {
-                        console.log(data, textStatus, xhr);
                         alert("Xəta baş verdi...")
                     }
                 }
@@ -1288,7 +1274,6 @@ if(window.location.pathname === "/dashboard/team") {
                     )
                 }
                 else {
-                    console.log(data, textStatus, xhr);
                     alert("Xəta baş verdi...")
                 }
             }
