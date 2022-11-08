@@ -612,7 +612,27 @@ function getCheckbox(element) {
 if(window.location.pathname === "/dashboard/products") {
     //Product List Table
     var ProductListTable = new gridjs.Grid({
-        columns: ["Məhsulun adı", "Qiyməti", "Status", "---"],
+        columns: [{
+            name: "Məhsulun adı"
+        },
+        {
+            name: "Qiyməti",
+            sort: {
+                enabled: true
+            }
+        },
+        {
+            name: "Status"
+        }, 
+        {
+            name: "---"
+        },
+        {
+            name: "Əlavə edilmə tarixi",
+            sort: {
+                enabled: true
+            }
+        }],
         pagination: {
             enabled: true,
             limit: 3,
@@ -639,7 +659,8 @@ if(window.location.pathname === "/dashboard/products") {
                     <button class="btn btn-sm btn-warning EditProductBTN"
                     data-uniq-id="${list.uniq_id}"
                     data-slug="${list.slug}"
-                    ><i class="fa fa-pencil"></i></button>`)
+                    ><i class="fa fa-pencil"></i></button>`),
+                    `${moment(list.createdAt).format("MM-DD-Y")}`
                 ])
             }
     }).render(document.getElementById("ProductListTable"));
