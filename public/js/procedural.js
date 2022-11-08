@@ -619,21 +619,56 @@ if(window.location.pathname === "/dashboard/products") {
             summary: false
         },
         server: {
-            url: `${api_base_url}/stroyka/get/products/all`,
+            url: `${api_base_url}/admin/get/allproducts`,
             then: data => data.map(list => 
                 [
                     list.name_az,
                     `${list.price}`,
-                    `${list.status}`,
+                    gridjs.html(`
+                    <div class="dropdown">
+                    <button class="btn ${list.status === 'active' ? "btn-success" : "btn-secondary"} btn-sm dropdown-toggle" type="button" 
+                    id="prod_status_dropdown" data-prod-status-return=""
+                    data-bs-toggle="dropdown">${list.status === 'active' ? "Aktiv" : "Deaktiv"}</button>
+                    <ul class="dropdown-menu" aria-labelledby="prod_status_dropdown">
+                    <li><button class="dropdown-item ChangeProductStatus" 
+                    type="button" data-uniq-id="${list.uniq_id}" 
+                    data-prod-status-return="${list.status}">${list.status === "active" ? "Deaktiv et" : "Aktiv et"}</button></li>
+                    </ul>
+                    </div>`),
                     gridjs.html(`<button class="btn btn-sm btn-danger DeleteProductBTN" data-uniq-id="${list.uniq_id}">Sil</button>
                     <button class="btn btn-sm btn-warning EditProductBTN"
                     data-uniq-id="${list.uniq_id}"
                     data-slug="${list.slug}"
                     ><i class="fa fa-pencil"></i></button>`)
                 ])
-          }
-      }).render(document.getElementById("ProductListTable"));
+            }
+    }).render(document.getElementById("ProductListTable"));
     
+    $(document).on("click", ".ChangeProductStatus", function() {
+        var uniq_id__ = $(this).attr("data-uniq-id");
+        var status__ = $(this).attr("data-prod-status-return");
+        $("#loader-cs").show();
+        $.ajax({
+            type: 'PUT',
+            url: `${api_base_url}/admin/update/productStatus`,
+            data: {
+                uniq_id: uniq_id__,
+                status: status__ === 'active' ? 'deactive' : 'active'
+            },
+            success: () => {
+                Swal.fire(
+                    'Məlumat',
+                    'Məhsul status uğurla yeniləndi',
+                    'success'
+                );
+            },
+            complete: () => {
+                ProductListTable.forceRender(document.getElementById("ProductListTable"));
+                $("#loader-cs").hide();
+            }
+        })
+    })
+
     $(document).on("click", ".EditProductBTN", function(event) {
         let ds__ = $(this).data("slug");
         $("#loader-cs").show();
@@ -1026,6 +1061,7 @@ if(window.location.pathname === "/dashboard/products") {
     $(document).on("click", ".DeleteDescriptionBTN", function() {  $(this).parent().parent().remove(); })
     $(document).on("click", ".DeleteProductBTN", function(e) {
         var tmp_id__ = $(this).data("uniq-id");
+        $("#loader-cs").show();
         $.ajax({
             type: "DELETE",
             url: `${api_base_url}/admin/delete/products`,
@@ -1051,6 +1087,9 @@ if(window.location.pathname === "/dashboard/products") {
                     'Məhsul checkout-da istifadə olunduqu üçün silinəbilməz.',
                     'error'
                 )
+            },
+            complete: () => {
+                $("#loader-cs").hide();
             }
         })
     })
