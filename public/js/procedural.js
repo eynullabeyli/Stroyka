@@ -438,7 +438,7 @@ if(window.location.pathname === "/dashboard/banner") {
                     `${JSON.parse(card.title).ru}`,
                     gridjs.html(`
                     <button type="button" data-id="${card.uniq_id}" class="btn btn-sm btn-danger DeleteBannerBTN"><i class="fa fa-trash"></i> Sil</button>
-                    <button type="button" data-id="${card.uniq_id}" class="btn btn-sm btn-warning EditBannerBTN" data-action="edit"><i class="fa fa-pencil"></i></button>`)
+                    <!-- <button type="button" data-id="${card.uniq_id}" class="btn btn-sm btn-warning EditBannerBTN" data-action="edit"><i class="fa fa-pencil"></i></button>-->`)
                 ])
           }
     }).render(document.getElementById("bannerListTable"));
@@ -606,6 +606,9 @@ var ProductListTable;
 function detectCheckbox(element) {
     return ($(element).prop('checked') == true ? 1 : 0);
 }
+function getCheckbox(element) {
+    return (element == true) ? 1 : 0 
+}
 if(window.location.pathname === "/dashboard/products") {
     //Product List Table
     var ProductListTable = new gridjs.Grid({
@@ -649,8 +652,11 @@ if(window.location.pathname === "/dashboard/products") {
                 $(`input[name="product_model_edit_input"]`).val(data.model)
                 $(`input[name="product_weight_edit_input"]`).val(data.weight)
                 $(`input[name="product_manufacturer_edit_input"]`).val(data.manufacturer)
-                data.isBestseller == true ? $(`#isbestseller_edit`).prop('checked', true) : $(`#isbestseller_edit`).prop('checked', false)
-                data.isFeatured == true ? $(`#isfeatured_edit`).prop('checked', true) : $(`#isfeatured_edit`).prop('checked', false)
+                data.isBestseller == true ? $(`#isBestseller_real_edit_input`).prop('checked', true) : $(`#isBestseller_real_edit_input`).prop('checked', false)
+                data.isFeatured == true ? $(`#isfeatured_real_edit_input`).prop('checked', true) : $(`#isfeatured_real_edit_input`).prop('checked', false)
+                $(`#isBestseller_real_edit_input`).val(getCheckbox(data.isBestseller))
+                $(`#isfeatured_real_edit_input`).val(getCheckbox(data.isFeatured))
+                $(`input[name="product_slug_input_edit"]`).val(data.slug)
                 $(`#up_cat_for_edit_product`).html('');
                 $(`#up_cat_for_edit_product`).append('<option selected value="0">Seçimi edin</option>')
                 $(`#sub_cat_for_edit_product`).html('');
@@ -732,7 +738,8 @@ if(window.location.pathname === "/dashboard/products") {
             "isFeatured": detectCheckbox($(`input[name="isfeatured_real_edit_input"]`)),
             "altcat_id": $(`select[name="alt_cat_for_edit_product"]`).val(),
             "subcat_id": $(`select[name="sub_cat_for_edit_product"]`).val(),
-            "cat_id": $(`select[name="up_cat_for_edit_product"]`).val()
+            "cat_id": $(`select[name="up_cat_for_edit_product"]`).val(),
+            "slug": $(`input[name="product_slug_input_edit"]`).val().toLowerCase().replace(' ','-')
         };
         console.log("before payload => ", body__edit_product);
         $.ajax({
@@ -1037,6 +1044,13 @@ if(window.location.pathname === "/dashboard/products") {
                     console.log(data, textStatus, xhr);
                     alert("Xəta baş verdi...")
                 }
+            },
+            error: () => {
+                Swal.fire(
+                    'Məlumat',
+                    'Məhsul checkout-da istifadə olunduqu üçün silinəbilməz.',
+                    'error'
+                )
             }
         })
     })
