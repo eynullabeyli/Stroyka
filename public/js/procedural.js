@@ -758,7 +758,47 @@ if(window.location.pathname === "/dashboard/products") {
                             }
                         })
                     }
+                });
+                $(".AddDescriptionBTN-edit").click(function(e) {
+                    let el__ = $(this);
+                    let tmp_dom__ = `
+                    <div class="card mt-1">
+                        <div class="card-header d-flex justify-content-between align-items-start">
+                            <span>${$(el__).parents().eq(1).find(".spec-title-input-edit").val()}</span>
+                            <button type="button" class="btn btn-sm btn-danger DeleteDescriptionBTN-edit"><i class="fa fa-trash"></i></button>
+                        </div>
+                        <div class="card-body"><span>${$(el__).parents().eq(1).find(".spec-context-input-edit").val()}</span></div>
+                    </div>`;
+                    if($(el__).parents().eq(1).find(".spec-title-input-edit").val().length > 1 && $(el__).parents().eq(1).find(".spec-context-input-edit").val().length > 1) {
+                        $(el__).parents().eq(1).siblings(".list-of-description-edit").append(tmp_dom__)
+                    }
+                });
+                $("#descriptionListElAZ_EDIT .list-of-description-edit").html('')
+                console.log(JSON.parse(data.description));
+                $(JSON.parse(data.description).az).each(function(key, val) {
+                    let tmp_dom__ = `
+                    <div class="card mt-1">
+                        <div class="card-header d-flex justify-content-between align-items-start">
+                            <span>${val.title}</span>
+                            <button type="button" class="btn btn-sm btn-danger DeleteDescriptionBTN-edit"><i class="fa fa-trash"></i></button>
+                        </div>
+                        <div class="card-body"><span>${val.context}</span></div>
+                    </div>`;
+                    $("#descriptionListElAZ_EDIT .list-of-description-edit").append(tmp_dom__)
                 })
+                $("#descriptionListElEN_EDIT .list-of-description-edit").html('')
+                $(JSON.parse(data.description).en).each(function(key, val) {
+                    let tmp_dom__ = `
+                    <div class="card mt-1">
+                        <div class="card-header d-flex justify-content-between align-items-start">
+                            <span>${val.title}</span>
+                            <button type="button" class="btn btn-sm btn-danger DeleteDescriptionBTN-edit"><i class="fa fa-trash"></i></button>
+                        </div>
+                        <div class="card-body"><span>${val.context}</span></div>
+                    </div>`;
+                    $("#descriptionListElEN_EDIT .list-of-description-edit").append(tmp_dom__)
+                })
+                
             },
             error: () => {
                 Swal.fire(
@@ -1110,6 +1150,25 @@ if(window.location.pathname === "/dashboard/products") {
     $(document).on("click", ".EditProductBTN", function() {
         var tmp_id__ = $(this).data("uniq-id");
     })
+
+    /* EDIT MODAL PART */
+    $(".AddDescriptionBTN-edit").click(function(e) {
+        let el__ = $(this);
+        let tmp_dom__ = `
+        <div class="card mt-1">
+            <div class="card-header d-flex justify-content-between align-items-start">
+                <span>${$(el__).parents().eq(1).find(".spec-title-input-edit").val()}</span>
+                <button type="button" class="btn btn-sm btn-danger DeleteDescriptionBTN-edit"><i class="fa fa-trash"></i></button>
+            </div>
+            <div class="card-body"><span>${$(el__).parents().eq(1).find(".spec-context-input-edit").val()}</span></div>
+        </div>`;
+        if($(el__).parents().eq(1).find(".spec-title-input-edit").val().length > 1 && $(el__).parents().eq(1).find(".spec-context-input-edit").val().length > 1) {
+            $(el__).parents().eq(1).siblings(".list-of-description-edit").append(tmp_dom__)
+            $(el__).parents().eq(1).find(".spec-title-input-edit").val('')
+            $(el__).parents().eq(1).find(".spec-context-input-edit").val('')
+        }
+    });
+    $(document).on("click", ".DeleteDescriptionBTN-edit", function() {  $(this).parent().parent().remove(); })
 }
 
 if(window.location.pathname === "/dashboard/form-request") {
