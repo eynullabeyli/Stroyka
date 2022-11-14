@@ -1,5 +1,5 @@
 /* Category section */
-const api_base_url =  "http://142.93.240.128:3000/api";
+const api_base_url =  "https://api.eynullabeyli.com/api";
 /* to get all up category list */
 function GetUpCategories() {
     let tmp__;
@@ -995,7 +995,7 @@ if(window.location.pathname === "/dashboard/products") {
                 context: $(val).find('span').eq(1).text()
             })
         })
-        return 'OK';
+        return ProducDescriptionAZEditor, ProducDescriptionENEditor, ProducDescriptionRUEditor;
     }
     function collectProductSpecifications() {
         ProductSpecificationAZEditor = [];
