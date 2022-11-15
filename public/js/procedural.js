@@ -217,7 +217,7 @@ $("#NewUpCategoryForm").submit( (e) => {
             name_az: $(`#NewUpCategoryForm input[name="up_cat_name_az_input"]`).val(),
             name_en: $(`#NewUpCategoryForm input[name="up_cat_name_en_input"]`).val(),
             name_ru: $(`#NewUpCategoryForm input[name="up_cat_name_ru_input"]`).val(),
-            slug: $(`#NewUpCategoryForm input[name="up_cat_name_az_input"]`).val().toLowerCase()
+            slug: $(`#NewUpCategoryForm input[name="up_cat_name_az_input"]`).val().toLowerCase().replace(' ','-')
         },
         success: function(data, textStatus, xhr) {
             if(xhr.status === 201) {
