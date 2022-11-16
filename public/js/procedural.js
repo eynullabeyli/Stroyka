@@ -774,7 +774,6 @@ if(window.location.pathname === "/dashboard/products") {
                     }
                 });
                 $("#descriptionListElAZ_EDIT .list-of-description-edit").html('')
-                console.log(JSON.parse(data.description));
                 $(JSON.parse(data.description).az).each(function(key, val) {
                     let tmp_dom__ = `
                     <div class="card mt-1">
