@@ -1,5 +1,5 @@
 /* Category section */
-const api_base_url =  "https://api.eynullabeyli.com/api";
+const api_base_url =  "https://api.i-link.az/api";
 /* to get all up category list */
 function GetUpCategories() {
     let tmp__;
