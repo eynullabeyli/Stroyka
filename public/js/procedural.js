@@ -75,7 +75,7 @@ if(window.location.pathname === "/dashboard/category") {
                     card.name_ru,
                     card.slug,
                     gridjs.html(`
-                    <button type="button
+                    <button type="button"
                     data-id="${card.uniq_id}" class="btn btn-sm btn-danger DeleteCategoryBTN">Sil</button>
                     <button type="button"
                     data-id="${card.uniq_id}"
