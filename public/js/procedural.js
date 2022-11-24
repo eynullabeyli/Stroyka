@@ -217,7 +217,7 @@ $("#NewUpCategoryForm").submit( (e) => {
             name_az: $(`#NewUpCategoryForm input[name="up_cat_name_az_input"]`).val(),
             name_en: $(`#NewUpCategoryForm input[name="up_cat_name_en_input"]`).val(),
             name_ru: $(`#NewUpCategoryForm input[name="up_cat_name_ru_input"]`).val(),
-            slug: $(`#NewUpCategoryForm input[name="up_cat_name_az_input"]`).val().toLowerCase().replace(' ','-')
+            slug: $(`#NewUpCategoryForm input[name="up_cat_name_az_input"]`).val().toLowerCase().replaceAll(' ','-')
         },
         success: function(data, textStatus, xhr) {
             if(xhr.status === 201) {
@@ -832,7 +832,7 @@ if(window.location.pathname === "/dashboard/products") {
             "altcat_id": $(`select[name="alt_cat_for_edit_product"]`).val(),
             "subcat_id": $(`select[name="sub_cat_for_edit_product"]`).val(),
             "cat_id": $(`select[name="up_cat_for_edit_product"]`).val(),
-            "slug": $(`input[name="product_slug_input_edit"]`).val().toLowerCase().replace(' ','-')
+            "slug": $(`input[name="product_slug_input_edit"]`).val().toLowerCase().replaceAll(' ','-')
         };
         $.ajax({
             method: "PUT",
@@ -1045,7 +1045,7 @@ if(window.location.pathname === "/dashboard/products") {
         $.each(document.getElementById('formFiles').files, function(i, file) {
             body__.append('images', file);
         });
-        let slug_text__ = $(`input[name="paroduct_slug_input"]`).val().replace(' ', '-');
+        let slug_text__ = $(`input[name="paroduct_slug_input"]`).val().replaceAll(' ', '-');
         body__.append("slug", slug_text__.toLowerCase());
         body__.append("status", "active");
         body__.append("weight", $(`input[name="product_weight_input"]`).val());
