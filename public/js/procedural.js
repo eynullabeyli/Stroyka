@@ -103,7 +103,11 @@ if(window.location.pathname === "/dashboard/category") {
                     card.slug,
                     gridjs.html(`
                     <button type="button" data-id="${card.uniq_id}" class="btn btn-sm btn-danger DeleteSubCategoryBTN">Sil</button>
-                    <button type="button" data-id="${card.uniq_id}" class="btn btn-sm btn-warning EditCatBTN" data-action="edit"><i class="fa fa-pencil"></i></button>`)
+                    <!-- <button type="button" data-id="${card.uniq_id}"
+                    data-name-az="${card.name_az}"
+                    data-name-en="${card.name_en}"
+                    data-name-ru="${card.name_ru}"
+                    class="btn btn-sm btn-warning EditCatBTN" data-action="edit"><i class="fa fa-pencil"></i></button> -->`)
                 ])
           }
     }).render(document.getElementById("subcategoryTable"));
@@ -125,18 +129,47 @@ if(window.location.pathname === "/dashboard/category") {
                     card.slug,
                     gridjs.html(`
                     <button type="button" data-id="${card.uniq_id}" class="btn btn-sm btn-danger DeleteAltCategoryBTN">Sil</button>
-                    <button type="button" data-id="${card.uniq_id}" class="btn btn-sm btn-warning EditCatBTN" data-action="edit"><i class="fa fa-pencil"></i></button>`)
+                    <!-- <button type="button" data-id="${card.uniq_id}"
+                    data-name-az="${card.name_az}"
+                    data-name-en="${card.name_en}"
+                    data-name-ru="${card.name_ru}"
+                    class="btn btn-sm btn-warning EditCatBTN" data-action="edit"><i class="fa fa-pencil"></i></button> -->`)
                 ])
           }
     }).render(document.getElementById("altcategoryTable"));
 
     $(document).on("click", ".EditCatBTN", function() {
+        $(`#CatInfoModal input[name="modal_cat_uniq_id"]`).val($(this).data("id"))
         $(`#cat_az_name_input`).val($(this).data("name-az"));
         $(`#cat_en_name_input`).val($(this).data("name-en"));
         $(`#cat_ru_name_input`).val($(this).data("name-ru"));
         $("#CatInfoModal").modal("show")
     });
 }
+
+$(".UpdateCategorySubmitBTN").click(function() {
+    $.ajax({
+        type: "PUT",
+        url: `${api_base_url}/admin/update/category`,
+        data: {
+            uniq_id: $(`#CatInfoModal input[name="modal_cat_uniq_id"]`).val(),
+            name_az: $(`#cat_az_name_input`).val(),
+            name_en: $(`#cat_en_name_input`).val(),
+            name_ru: $(`#cat_ru_name_input`).val()
+        },
+        success: function(data) {
+            Swal.fire(
+                'Məlumat',
+                'Uğurla yeniləndi',
+                'succes'
+            );
+            categoryTable.forceRender(document.getElementById("categoryTable"));
+        },
+        error: () => {
+            alert("Xəta baş verdi");
+        }
+    })
+})
 
 $(document).on("click", ".DeleteCategoryBTN", function(e) {
     let tmp_id__ = $(this).data("id");
@@ -217,7 +250,7 @@ $("#NewUpCategoryForm").submit( (e) => {
             name_az: $(`#NewUpCategoryForm input[name="up_cat_name_az_input"]`).val(),
             name_en: $(`#NewUpCategoryForm input[name="up_cat_name_en_input"]`).val(),
             name_ru: $(`#NewUpCategoryForm input[name="up_cat_name_ru_input"]`).val(),
-            slug: $(`#NewUpCategoryForm input[name="up_cat_name_az_input"]`).val().toLowerCase().replaceAll(' ','-')
+            slug: $(`#NewUpCategoryForm input[name="up_cat_name_az_input"]`).val().toLowerCase().replaceAll(' ','_')
         },
         success: function(data, textStatus, xhr) {
             if(xhr.status === 201) {
@@ -832,7 +865,7 @@ if(window.location.pathname === "/dashboard/products") {
             "altcat_id": $(`select[name="alt_cat_for_edit_product"]`).val(),
             "subcat_id": $(`select[name="sub_cat_for_edit_product"]`).val(),
             "cat_id": $(`select[name="up_cat_for_edit_product"]`).val(),
-            "slug": $(`input[name="product_slug_input_edit"]`).val().toLowerCase().replaceAll(' ','-')
+            "slug": $(`input[name="product_slug_input_edit"]`).val().toLowerCase().replaceAll(' ','_')
         };
         $.ajax({
             method: "PUT",
