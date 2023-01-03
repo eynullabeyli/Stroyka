@@ -1,43 +1,42 @@
 module.exports = (app) => {
     app.get('/', (req, res) => {
-        res.redirect('./dashboard/slider')
+        req.cookies.auth_ ? res.redirect('./dashboard/slider') : res.render("pages/auth/login",  {layout: false});
     });
     app.get('/login', (req, res) => {
         res.render('pages/auth/login', {layout: false})
     });
     app.get('/main', (req, res) => {
-        res.render('pages/dashboard/main')
+        req.cookies.auth_ ? res.render('pages/dashboard/main') : res.render("pages/auth/login",  {layout: false});
     });
     app.get('/slider', (req, res) => {
-        res.render('pages/dashboard/slider')
+        req.cookies.auth_ ? res.render('pages/dashboard/slider') : res.render("pages/auth/login",  {layout: false});
     });
     app.get('/banner', (req, res) => {
-        res.render('pages/dashboard/banner')
+        req.cookies.auth_ ? res.render('pages/dashboard/banner') : res.render("pages/auth/login",  {layout: false});
     })
     app.get('/category', (req, res) => {
-        res.render('pages/dashboard/category')
+        req.cookies.auth_ ? res.render('pages/dashboard/category') : res.render("pages/auth/login",  {layout: false});
     });
     app.get('/products', (req, res) => {
-        res.render('pages/dashboard/products')
+        req.cookies.auth_ ? res.render('pages/dashboard/products') : res.render("pages/auth/login",  {layout: false});
     });
     app.get('/orders', (req, res) => {
-        res.render('pages/dashboard/orders')
+        req.cookies.auth_ ? res.render('pages/dashboard/orders') : res.render("pages/auth/login",  {layout: false});
     });
     app.get('/users', (req, res) => {
-        res.render('pages/dashboard/users')
+        req.cookies.auth_ ? res.render('pages/dashboard/users') : res.render("pages/auth/login",  {layout: false});
     });
     app.get('/about', (req, res) => {
-        res.render('pages/dashboard/about')
+        req.cookies.auth_ ? res.render('pages/dashboard/about') : res.render("pages/auth/login",  {layout: false});
     });
     app.get('/contact', (req, res) => {
-        res.render('pages/dashboard/contact')
+        req.cookies.auth_ ? res.render('pages/dashboard/contact') : res.render("pages/auth/login",  {layout: false});
     });
     app.get('/form-request', (req, res) => {
-        res.render('pages/dashboard/formrequest')
+        req.cookies.auth_ ? res.render('pages/dashboard/formrequest') : res.render("pages/auth/login",  {layout: false});
     });
     app.get('/team', (req, res) => {
-        res.render('pages/dashboard/team')
+        req.cookies.auth_ ? res.render('pages/dashboard/team') : res.render("pages/auth/login",  {layout: false});
     });
- 
     return app; 
  };
