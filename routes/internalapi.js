@@ -14,7 +14,9 @@ module.exports = (app) => {
         }
     });
     app.get('/logout', (req, res) => {
-        res.send("OK@200")
+        res.clearCookie('auth_');
+        res.redirect('/auth/login');
+        next();
     });
     return app; 
  };
