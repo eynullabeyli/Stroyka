@@ -1086,7 +1086,14 @@ if(window.location.pathname === "/dashboard/products") {
         body__.append("code", $(`input[name="product_code_input"]`).val());
         body__.append("type", "0");
         body__.append("price", $(`input[name="product_price_input"]`).val());
-        body__.append("manufacturer", $(`input[name="product_manufacturer_input"]`).val());
+        let prod_man__ = [
+            {
+                az: $(`#NewProductForm input[name="product_manufacturer_input"]`).val(),
+                en: $(`#NewProductForm input[name="product_manufacturer_en_input"]`).val(),
+                ru: $(`#NewProductForm input[name="product_manufacturer_ru_input"]`).val()
+            }
+        ];
+        body__.append("manufacturer", JSON.stringify(prod_man__));
         body__.append("isBestseller", $(`input[name="isBestseller_real_input"]`).val());
         body__.append("isFeatured", $(`input[name="isfeatured_real_input"]`).val());
         body__.append("altcat_id", $(`select[name="alt_cat_for_product"]`).val());
