@@ -905,6 +905,31 @@ if(window.location.pathname === "/dashboard/products") {
                     </div>`;
                     $("#descriptionListElRU_EDIT .list-of-description-edit").append(tmp_dom__)
                 });
+                //specificationListElAZ_EDIT
+                $(JSON.parse(data.specification).az).each(function(key, val) {
+                    let tmp_dom__ = `
+                    <div class="list-group-item list-group-item-action d-flex justify-content-between align-items-start">
+                        <span>${val.title}</span>: <span>${val.context}</span>
+                        <button type="button" class="btn btn-sm btn-danger RemoveFronListSPEC_EDIT"><i class="fa fa-trash"></i></button>
+                    </div>`;
+                    $("#specificationListElAZ_EDIT").append(tmp_dom__)
+                });
+                $(JSON.parse(data.specification).en).each(function(key, val) {
+                    let tmp_dom__ = `
+                    <div class="list-group-item list-group-item-action d-flex justify-content-between align-items-start">
+                        <span>${val.title}</span>: <span>${val.context}</span>
+                        <button type="button" class="btn btn-sm btn-danger RemoveFronListSPEC_EDIT"><i class="fa fa-trash"></i></button>
+                    </div>`;
+                    $("#specificationListElEN_EDIT").append(tmp_dom__)
+                });
+                $(JSON.parse(data.specification).ru).each(function(key, val) {
+                    let tmp_dom__ = `
+                    <div class="list-group-item list-group-item-action d-flex justify-content-between align-items-start">
+                        <span>${val.title}</span>: <span>${val.context}</span>
+                        <button type="button" class="btn btn-sm btn-danger RemoveFronListSPEC_EDIT"><i class="fa fa-trash"></i></button>
+                    </div>`;
+                    $("#specificationListElRU_EDIT").append(tmp_dom__)
+                });
                 
             },
             error: () => {
@@ -920,6 +945,9 @@ if(window.location.pathname === "/dashboard/products") {
             }
         })
     });
+    $(document).on("click", ".RemoveFronListSPEC_EDIT", function(event) {
+        $(this).parent().remove();
+    })
 
     $("#EditProductForm").submit((e) => {
         e.preventDefault();
