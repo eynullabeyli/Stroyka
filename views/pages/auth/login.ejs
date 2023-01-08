@@ -33,7 +33,7 @@
                                                 <label class="form-check-label" for="inputRememberPassword">Sistemdə qal</label>
                                             </div>
                                             <div class="d-flex align-items-center justify-content-between mt-4 mb-0">
-                                                <button type="submit" class="btn btn-primary">Daxil ol</button>
+                                                <button type="submit" class="btn btn-primary LoginBTN">Daxil ol</button>
                                             </div>
                                         </form>
                                     </div>
@@ -58,8 +58,10 @@
                         password: $("#inputPassword").val()
                     },
                     success: function(data) {
-                        alert("Siz yönləndirlirsiniz")
-                        window.location.href = '/dashboard/slider';
+                        $(".LoginBTN").text("Siz yönləndirlirsiniz...");
+                        setTimeout(() => {
+                            window.location.href = '/dashboard/slider';
+                        }, 500);
                     },
                     error: function(data) {
                         alert("Şifrə və ya email yanlışdır")

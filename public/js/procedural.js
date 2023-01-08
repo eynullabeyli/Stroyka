@@ -848,7 +848,7 @@ if(window.location.pathname === "/dashboard/products") {
                                 })
                             },
                             complete: () => {
-                                $(`#alt_cat_for_edit_product option[value="${data.altcategory.uniq_id}"]`).prop('selected', true)
+                                $(`#alt_cat_for_edit_product option[value="${data.altcategory?.uniq_id}"]`).prop('selected', true)
                                 $("#loader-cs").hide();
                                 $("#EditProductModal").modal("show")
                             }
@@ -882,7 +882,6 @@ if(window.location.pathname === "/dashboard/products") {
                     $("#descriptionListElAZ_EDIT .list-of-description-edit").append(tmp_dom__)
                 })
                 $("#descriptionListElEN_EDIT .list-of-description-edit").html('')
-                console.log(JSON.parse(data.description).en);
                 $(JSON.parse(data.description).en).each(function(key, val) {
                     let tmp_dom__ = `
                     <div class="card mt-1">
@@ -893,7 +892,19 @@ if(window.location.pathname === "/dashboard/products") {
                         <div class="card-body"><span>${val.context}</span></div>
                     </div>`;
                     $("#descriptionListElEN_EDIT .list-of-description-edit").append(tmp_dom__)
-                })
+                });
+                $("#descriptionListElRU_EDIT .list-of-description-edit").html('')
+                $(JSON.parse(data.description).ru).each(function(key, val) {
+                    let tmp_dom__ = `
+                    <div class="card mt-1">
+                        <div class="card-header d-flex justify-content-between align-items-start">
+                            <span>${val.title}</span>
+                            <button type="button" class="btn btn-sm btn-danger DeleteDescriptionBTN-edit"><i class="fa fa-trash"></i></button>
+                        </div>
+                        <div class="card-body"><span>${val.context}</span></div>
+                    </div>`;
+                    $("#descriptionListElRU_EDIT .list-of-description-edit").append(tmp_dom__)
+                });
                 
             },
             error: () => {
@@ -1080,19 +1091,19 @@ if(window.location.pathname === "/dashboard/products") {
         ProducDescriptionAZEditor = []
         ProducDescriptionENEditor = []
         ProducDescriptionRUEditor = []
-        $("#descriptionListElAZ .list-of-description").each(function(key, val) {
+        $("#descriptionListElAZ .list-of-description .card").each(function(key, val) {
             ProducDescriptionAZEditor.push({
                 title: $(val).find('span').eq(0).text(),
                 context: $(val).find('span').eq(1).text()
             })
         })
-        $("#descriptionListElEN .list-of-description").each(function(key, val) {
+        $("#descriptionListElEN .list-of-description .card").each(function(key, val) {
             ProducDescriptionENEditor.push({
                 title: $(val).find('span').eq(0).text(),
                 context: $(val).find('span').eq(1).text()
             })
         })
-        $("#descriptionListElRU .list-of-description").each(function(key, val) {
+        $("#descriptionListElRU .list-of-description .card").each(function(key, val) {
             ProducDescriptionRUEditor.push({
                 title: $(val).find('span').eq(0).text(),
                 context: $(val).find('span').eq(1).text()
@@ -1250,7 +1261,8 @@ if(window.location.pathname === "/dashboard/products") {
                     'Məlumat',
                     'Məhsul checkout-da istifadə olunduqu üçün silinəbilməz.',
                     'error'
-                )
+                );
+                ProductListTable.forceRender(document.getElementById("ProductListTable"));
             },
             complete: () => {
                 $("#loader-cs").hide();
