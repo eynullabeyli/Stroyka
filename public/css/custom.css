@@ -17,3 +17,7 @@ td.gridjs-td {
 .InStepProdUpdate {
     display: none;
 }
+
+.product-manufacturer-box .input-group-text {
+    font-size: 12px;
+}

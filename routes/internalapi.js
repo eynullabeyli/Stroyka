@@ -16,7 +16,6 @@ module.exports = (app) => {
     app.get('/logout', (req, res) => {
         res.clearCookie('auth_');
         res.redirect('/auth/login');
-        next();
     });
     return app; 
  };
