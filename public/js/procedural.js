@@ -103,11 +103,11 @@ if(window.location.pathname === "/dashboard/category") {
                     card.slug,
                     gridjs.html(`
                     <button type="button" data-id="${card.uniq_id}" class="btn btn-sm btn-danger DeleteSubCategoryBTN">Sil</button>
-                    <!-- <button type="button" data-id="${card.uniq_id}"
+                    <button type="button" data-id="${card.uniq_id}"
                     data-name-az="${card.name_az}"
                     data-name-en="${card.name_en}"
                     data-name-ru="${card.name_ru}"
-                    class="btn btn-sm btn-warning EditCatBTN" data-action="edit"><i class="fa fa-pencil"></i></button> -->`)
+                    class="btn btn-sm btn-warning EditSubCatBTN" data-action="edit"><i class="fa fa-pencil"></i></button>`)
                 ])
           }
     }).render(document.getElementById("subcategoryTable"));
@@ -129,11 +129,11 @@ if(window.location.pathname === "/dashboard/category") {
                     card.slug,
                     gridjs.html(`
                     <button type="button" data-id="${card.uniq_id}" class="btn btn-sm btn-danger DeleteAltCategoryBTN">Sil</button>
-                    <!-- <button type="button" data-id="${card.uniq_id}"
+                    <button type="button" data-id="${card.uniq_id}"
                     data-name-az="${card.name_az}"
                     data-name-en="${card.name_en}"
                     data-name-ru="${card.name_ru}"
-                    class="btn btn-sm btn-warning EditCatBTN" data-action="edit"><i class="fa fa-pencil"></i></button> -->`)
+                    class="btn btn-sm btn-warning EditAltCatBTN" data-action="edit"><i class="fa fa-pencil"></i></button>`)
                 ])
           }
     }).render(document.getElementById("altcategoryTable"));
@@ -144,6 +144,20 @@ if(window.location.pathname === "/dashboard/category") {
         $(`#cat_en_name_input`).val($(this).data("name-en"));
         $(`#cat_ru_name_input`).val($(this).data("name-ru"));
         $("#CatInfoModal").modal("show")
+    });
+    $(document).on("click", ".EditSubCatBTN", function() {
+        $(`#SubCatInfoModal input[name="modal_cat_uniq_id"]`).val($(this).data("id"))
+        $(`#sub_cat_az_name_input`).val($(this).data("name-az"));
+        $(`#sub_cat_en_name_input`).val($(this).data("name-en"));
+        $(`#sub_cat_ru_name_input`).val($(this).data("name-ru"));
+        $("#SubCatInfoModal").modal("show")
+    });
+    $(document).on("click", ".EditAltCatBTN", function() {
+        $(`#AltCatInfoModal input[name="modal_cat_uniq_id"]`).val($(this).data("id"))
+        $(`#alt_cat_az_name_input`).val($(this).data("name-az"));
+        $(`#alt_cat_en_name_input`).val($(this).data("name-en"));
+        $(`#alt_cat_ru_name_input`).val($(this).data("name-ru"));
+        $("#AltCatInfoModal").modal("show")
     });
 }
 
@@ -161,7 +175,7 @@ $(".UpdateCategorySubmitBTN").click(function() {
             Swal.fire(
                 'Məlumat',
                 'Uğurla yeniləndi',
-                'succes'
+                'success'
             );
             categoryTable.forceRender(document.getElementById("categoryTable"));
         },
@@ -169,7 +183,54 @@ $(".UpdateCategorySubmitBTN").click(function() {
             alert("Xəta baş verdi");
         }
     })
-})
+});
+$(".UpdateSubCategorySubmitBTN").click(function() {
+    $.ajax({
+        type: "PUT",
+        url: `${api_base_url}/admin/update/subcategory`,
+        data: {
+            uniq_id: $(`#SubCatInfoModal input[name="modal_cat_uniq_id"]`).val(),
+            name_az: $(`#sub_cat_az_name_input`).val(),
+            name_en: $(`#sub_cat_en_name_input`).val(),
+            name_ru: $(`#sub_cat_ru_name_input`).val()
+        },
+        success: function(data) {
+            Swal.fire(
+                'Məlumat',
+                'Uğurla yeniləndi',
+                'success'
+            );
+            subcategoryTable.forceRender(document.getElementById("subcategoryTable"));
+        },
+        error: () => {
+            alert("Xəta baş verdi");
+        }
+    })
+});
+
+$(".UpdateAltCategorySubmitBTN").click(function() {
+    $.ajax({
+        type: "PUT",
+        url: `${api_base_url}/admin/update/altcategory`,
+        data: {
+            uniq_id: $(`#AltCatInfoModal input[name="modal_cat_uniq_id"]`).val(),
+            name_az: $(`#alt_cat_az_name_input`).val(),
+            name_en: $(`#alt_cat_en_name_input`).val(),
+            name_ru: $(`#alt_cat_ru_name_input`).val()
+        },
+        success: function(data) {
+            Swal.fire(
+                'Məlumat',
+                'Uğurla yeniləndi',
+                'success'
+            );
+            altcategoryTable.forceRender(document.getElementById("altcategoryTable"));
+        },
+        error: () => {
+            alert("Xəta baş verdi");
+        }
+    })
+});
 
 $(document).on("click", ".DeleteCategoryBTN", function(e) {
     let tmp_id__ = $(this).data("id");
@@ -738,7 +799,9 @@ if(window.location.pathname === "/dashboard/products") {
                 $(`input[name="product_code_edit_input"]`).val(data.code)
                 $(`input[name="product_model_edit_input"]`).val(data.model)
                 $(`input[name="product_weight_edit_input"]`).val(data.weight)
-                $(`input[name="product_manufacturer_edit_input"]`).val(data.manufacturer)
+                $(`#EditProductForm input[name="product_manufacturer_edit_input"]`).val(JSON.parse(data.manufacturer)[0].az)
+                $(`#EditProductForm input[name="product_manufacturer_en_edit_input"]`).val(JSON.parse(data.manufacturer)[0].en)
+                $(`#EditProductForm input[name="product_manufacturer_ru_edit_input"]`).val(JSON.parse(data.manufacturer)[0].ru)
                 data.isBestseller == true ? $(`#isBestseller_real_edit_input`).prop('checked', true) : $(`#isBestseller_real_edit_input`).prop('checked', false)
                 data.isFeatured == true ? $(`#isfeatured_real_edit_input`).prop('checked', true) : $(`#isfeatured_real_edit_input`).prop('checked', false)
                 $(`#isBestseller_real_edit_input`).val(getCheckbox(data.isBestseller))
@@ -819,6 +882,7 @@ if(window.location.pathname === "/dashboard/products") {
                     $("#descriptionListElAZ_EDIT .list-of-description-edit").append(tmp_dom__)
                 })
                 $("#descriptionListElEN_EDIT .list-of-description-edit").html('')
+                console.log(JSON.parse(data.description).en);
                 $(JSON.parse(data.description).en).each(function(key, val) {
                     let tmp_dom__ = `
                     <div class="card mt-1">
@@ -850,6 +914,13 @@ if(window.location.pathname === "/dashboard/products") {
         e.preventDefault();
         $(`#EditProductForm .OutStepProdUpdate`).hide();
         $(`#EditProductForm .InStepProdUpdate`).show();
+        let prod_man__ = [
+            {
+                az: $(`#EditProductForm input[name="product_manufacturer_edit_input"]`).val(),
+                en: $(`#EditProductForm input[name="product_manufacturer_en_edit_input"]`).val(),
+                ru: $(`#EditProductForm input[name="product_manufacturer_ru_edit_input"]`).val()
+            }
+        ];
         var body__edit_product = {
             "uniq_id": $(`input[name="product_uniqid_edit_input"]`).val(),
             "name_az": $(`input[name="paroduct_name_az_edit_input"]`).val(),
@@ -859,7 +930,7 @@ if(window.location.pathname === "/dashboard/products") {
             "model": $(`input[name="product_model_edit_input"]`).val(),
             "code": $(`input[name="product_code_edit_input"]`).val(),
             "price": parseFloat($(`input[name="product_price_edit_input"]`).val()),
-            "manufacturer": $(`input[name="product_manufacturer_edit_input"]`).val(),
+            "manufacturer": JSON.stringify(prod_man__),
             "isBestseller": detectCheckbox($(`input[name="isBestseller_real_edit_input"]`)),
             "isFeatured": detectCheckbox($(`input[name="isfeatured_real_edit_input"]`)),
             "altcat_id": $(`select[name="alt_cat_for_edit_product"]`).val(),
